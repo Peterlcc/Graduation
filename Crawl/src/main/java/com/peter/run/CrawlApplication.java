@@ -39,7 +39,7 @@ public class CrawlApplication
         	{
         		job=pullTask.getJob();
         		if(job==null) break;
-        		List<CrawlJob> list = houseParsers.get(job.getJobType()).parse();
+        		List<CrawlJob> list = houseParsers.get(job.getJobType()).parse("context");
         		for (CrawlJob crawlJob : list) {
 					pushTask.addJob(crawlJob);
 				}

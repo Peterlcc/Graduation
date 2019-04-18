@@ -15,11 +15,11 @@ public class JedisPoolUtil {
 				if(jedisPool==null)
 				{
 					JedisPoolConfig poolConfig=new JedisPoolConfig();
-					poolConfig.setMaxTotal(1000);
-					poolConfig.setMaxIdle(32);
-					poolConfig.setMaxWaitMillis(100*1000);
+					poolConfig.setMaxTotal(100);
+					poolConfig.setMaxIdle(20);
+					poolConfig.setMaxWaitMillis(100*100);
 					poolConfig.setTestOnBorrow(true);
-					jedisPool=new JedisPool(poolConfig, "127.0.0.1", 6379);
+					jedisPool=new JedisPool(poolConfig, "47.93.239.158", 6379);
 				}
 			}
 		}

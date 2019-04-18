@@ -1,6 +1,5 @@
 package com.peter.utils;
 
-import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;

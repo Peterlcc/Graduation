@@ -17,7 +17,8 @@
 		extends="BaseResultMap">
 		<association property="city"
 			javaType="com.peter.bean.City"
-			select="com.peter.mapper.CityMapper.selectByPrimaryKey" column="city_id"></association>
+			select="com.peter.mapper.CityMapper.selectByPrimaryKey"
+			column="city_id"></association>
 	</resultMap>
 	<sql id="Base_Column_List">
 		id, url, name, job_type, city_id
@@ -29,29 +30,38 @@
 		from area
 		where id = #{id,jdbcType=INTEGER}
 	</select>
-	
-	<select id="selectAll"
-		resultMap="areaCityResultMap">
+
+	<select id="selectAll" resultMap="areaCityResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from area
 	</select>
-	
+
 	<delete id="deleteByPrimaryKey"
 		parameterType="java.lang.Integer">
 		delete from area
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.peter.bean.Area">
+		<selectKey keyProperty="id" order="AFTER" resultType="int">
+			select
+			last_insert_id();
+		</selectKey>
 		insert into area (id, url,
 		name,
 		job_type, city_id)
-		values (#{id,jdbcType=INTEGER},
+		values
+		(#{id,jdbcType=INTEGER},
 		#{url,jdbcType=VARCHAR},
 		#{name,jdbcType=VARCHAR},
-		#{jobType,jdbcType=INTEGER}, #{cityId,jdbcType=INTEGER})
+		#{jobType,jdbcType=INTEGER},
+		#{cityId,jdbcType=INTEGER})
 	</insert>
 	<insert id="insertSelective" parameterType="com.peter.bean.Area">
+		<selectKey keyProperty="id" order="AFTER" resultType="int">
+			select
+			last_insert_id();
+		</selectKey>
 		insert into area
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">

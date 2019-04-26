@@ -1,5 +1,7 @@
 package com.peter.mapper;
 
+import java.util.List;
+
 import com.peter.bean.Page;
 
 public interface PageMapper {
@@ -10,6 +12,7 @@ public interface PageMapper {
     int insertSelective(Page record);
 
     Page selectByPrimaryKey(Integer id);
+    List<Page> selectAll();
 
     int updateByPrimaryKeySelective(Page record);
 

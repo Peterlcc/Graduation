@@ -9,17 +9,28 @@ public class Page {
 
     private Integer jobType;
 
-    private Integer areaId;
+    private Integer streetId;
+    private Street street;
 
-    public Page(Integer id, String url, Integer serialNumber, Integer jobType, Integer areaId) {
+    public Page(Integer id, String url, Integer serialNumber, Integer jobType, Integer streetId) {
         this.id = id;
         this.url = url;
         this.serialNumber = serialNumber;
         this.jobType = jobType;
-        this.areaId = areaId;
+        this.streetId = streetId;
     }
 
-    public Page() {
+    public Page(Integer id, String url, Integer serialNumber, Integer jobType, Integer streetId, Street street) {
+		super();
+		this.id = id;
+		this.url = url;
+		this.serialNumber = serialNumber;
+		this.jobType = jobType;
+		this.streetId = streetId;
+		this.street = street;
+	}
+
+	public Page() {
         super();
     }
 
@@ -55,18 +66,28 @@ public class Page {
         this.jobType = jobType;
     }
 
-    public Integer getAreaId() {
-        return areaId;
+    public Integer getStreetId() {
+        return streetId;
     }
 
-    public void setAreaId(Integer areaId) {
-        this.areaId = areaId;
+    public void setStreetId(Integer streetId) {
+        this.streetId = streetId;
     }
+
+	public Street getStreet() {
+		return street;
+	}
+
+	public void setStreet(Street street) {
+		this.street = street;
+	}
 
 	@Override
 	public String toString() {
 		return "Page [id=" + id + ", url=" + url + ", serialNumber=" + serialNumber + ", jobType=" + jobType
-				+ ", areaId=" + areaId + "]";
+				+ ", streetId=" + streetId + ", street=" + street + "]";
 	}
+
+	
     
 }

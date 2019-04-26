@@ -10,8 +10,8 @@ public class Street {
     private Integer jobType;
 
     private Integer areaId;
-    private Area area;
 
+    private Area area;
     public Street(Integer id, String name, String url, Integer jobType, Integer areaId) {
         this.id = id;
         this.name = name;
@@ -20,16 +20,16 @@ public class Street {
         this.areaId = areaId;
     }
 
-    public Street(Integer id, String name, String url, Integer jobType, Integer areaId, Area area) {
-		this.id = id;
-		this.name = name;
-		this.url = url;
-		this.jobType = jobType;
-		this.areaId = areaId;
-		this.area = area;
-	}
+    public Street() {
+        super();
+    }
 
-	public Street() {
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Area getArea() {
@@ -40,15 +40,7 @@ public class Street {
 		this.area = area;
 	}
 
-	public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
+	public String getName() {
         return name;
     }
 
@@ -79,6 +71,15 @@ public class Street {
     public void setAreaId(Integer areaId) {
         this.areaId = areaId;
     }
+
+	public Street(Integer id, String name, String url, Integer jobType, Integer areaId, Area area) {
+		this.id = id;
+		this.name = name;
+		this.url = url;
+		this.jobType = jobType;
+		this.areaId = areaId;
+		this.area = area;
+	}
 
 	@Override
 	public String toString() {

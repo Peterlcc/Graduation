@@ -40,18 +40,19 @@
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.peter.bean.Street">
-		insert into street (id, name,
-		url,
+		<selectKey keyProperty="id" order="AFTER" resultType="int">
+			select
+			last_insert_id();
+		</selectKey>
+		insert into street (id, name, url,
 		job_type, area_id)
-		values (#{id,jdbcType=INTEGER},
-		#{name,jdbcType=VARCHAR},
+		values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
 		#{url,jdbcType=VARCHAR},
 		#{jobType,jdbcType=INTEGER}, #{areaId,jdbcType=INTEGER})
 	</insert>
 	<insert id="insertSelective"
 		parameterType="com.peter.bean.Street">
-		<selectKey order="AFTER" keyProperty="id"
-			resultType="java.lang.Integer">
+		<selectKey keyProperty="id" order="AFTER" resultType="int">
 			select
 			last_insert_id();
 		</selectKey>
@@ -114,8 +115,7 @@
 		parameterType="com.peter.bean.Street">
 		update street
 		set name = #{name,jdbcType=VARCHAR},
-		url =
-		#{url,jdbcType=VARCHAR},
+		url = #{url,jdbcType=VARCHAR},
 		job_type = #{jobType,jdbcType=INTEGER},
 		area_id = #{areaId,jdbcType=INTEGER}
 		where id = #{id,jdbcType=INTEGER}

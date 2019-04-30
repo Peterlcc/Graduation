@@ -13,6 +13,7 @@ public interface HouseUrlMapper {
 
     HouseUrl selectByPrimaryKey(Integer id);
     List<HouseUrl> selectAll();
+    List<HouseUrl> selectByPageId(Integer pageId);
 
     int updateByPrimaryKeySelective(HouseUrl record);
 

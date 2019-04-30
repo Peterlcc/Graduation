@@ -3,7 +3,6 @@ package com.peter.utils;
 import java.io.IOException;
 import java.util.List;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -28,13 +27,13 @@ public class HttpClientRequest {
 			client = HttpClientBuilder.create().build();
 			HttpGet request = new HttpGet(url);
 			request.setHeader("user-agent", userAgentList.get(randomIndex));
-			request.setHeader("Accept", "  text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-			request.setHeader("Accept-Language", "zh-cn,zh;q=0.5");
-			// request.setHeader("Connection", "close");
+			request.setHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3");
+			request.setHeader("Accept-Language", "zh-cn,zh;q=0.9");
+			request.setHeader("Connection", "keep-alive");
 			request.setHeader("Accept-Charset", "  GB2312,utf-8;q=0.7,*;q=0.7");
-			System.out.print(" [user-agent:" + randomIndex + "] ");
+			//System.out.print(" [user-agent:" + randomIndex + "] ");
 			response = client.execute(request);
-			System.out.print(" response:" + response.getProtocolVersion() + " ");
+			//System.out.print(" response:" + response.getProtocolVersion() + " ");
 			HttpEntity entity = response.getEntity();
 			String text = EntityUtils.toString(entity, "utf-8");
 			EntityUtils.consume(entity);
@@ -52,7 +51,7 @@ public class HttpClientRequest {
 					e.printStackTrace();
 				}
 			}
-			System.out.print("response closed ");
+			//System.out.print("response closed ");
 			if (client != null) {
 				try {
 					client.close();
@@ -60,7 +59,7 @@ public class HttpClientRequest {
 					e.printStackTrace();
 				}
 			}
-			System.out.print("client closed");
+			//System.out.print("client closed");
 		}
 	}
 }

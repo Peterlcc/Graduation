@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.peter.bean.CrawlJob;
-import com.peter.parse.Parser;
 import com.peter.task.PullTask;
 import com.peter.task.PushTask;
 import com.peter.utils.CrawlUtil;
@@ -14,7 +13,7 @@ import com.peter.utils.CrawlUtil;
 public class CrawlApplication 
 {
 	private static Map<String, Thread> threads=new HashMap<String, Thread>();
-	private static List<Parser> houseParsers=new ArrayList<Parser>(); 
+	//private static List<Parser> houseParsers=new ArrayList<Parser>(); 
 	
 	static {
 		threads.put("pullTask", new PullTask());
@@ -39,7 +38,7 @@ public class CrawlApplication
         	{
         		job=pullTask.getJob();
         		if(job==null) break;
-        		List<CrawlJob> list = houseParsers.get(job.getJobType()).parse("context");
+        		List<CrawlJob> list = null;//houseParsers.get(job.getJobType()).parse("context");
         		for (CrawlJob crawlJob : list) {
 					pushTask.addJob(crawlJob);
 				}

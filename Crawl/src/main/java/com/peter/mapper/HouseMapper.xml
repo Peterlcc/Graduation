@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.peter.mapper.HouseMapper">
+  <resultMap id="BaseResultMap" type="com.peter.bean.House">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="url" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="page_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="house_code" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="release_time" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="business_license" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="price" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="pay_type" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="tags" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="rent_type" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="room_type" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="area" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="direction" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="dealer_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="dealer_company" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="dealer_type" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="dealer_phone" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="checkin_type" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="rent_time" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="look_type" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="floor" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="elevator" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="car_pos" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="water" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="electricity" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="gas" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="facility" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="nearby" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, url, page_id, title, house_code, release_time, business_license, price, pay_type, 
+    tags, rent_type, room_type, area, direction, dealer_name, dealer_company, dealer_type, 
+    dealer_phone, checkin_type, rent_time, look_type, floor, elevator, car_pos, water, 
+    electricity, gas, facility, nearby
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from house
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from house
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.peter.bean.House">
+    insert into house (id, url, page_id, 
+      title, house_code, release_time, 
+      business_license, price, pay_type, 
+      tags, rent_type, room_type, 
+      area, direction, dealer_name, 
+      dealer_company, dealer_type, dealer_phone, 
+      checkin_type, rent_time, look_type, 
+      floor, elevator, car_pos, 
+      water, electricity, gas, 
+      facility, nearby)
+    values (#{id,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{pageId,jdbcType=INTEGER}, 
+      #{title,jdbcType=VARCHAR}, #{houseCode,jdbcType=VARCHAR}, #{releaseTime,jdbcType=DATE}, 
+      #{businessLicense,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{payType,jdbcType=VARCHAR}, 
+      #{tags,jdbcType=VARCHAR}, #{rentType,jdbcType=VARCHAR}, #{roomType,jdbcType=VARCHAR}, 
+      #{area,jdbcType=DOUBLE}, #{direction,jdbcType=VARCHAR}, #{dealerName,jdbcType=VARCHAR}, 
+      #{dealerCompany,jdbcType=VARCHAR}, #{dealerType,jdbcType=VARCHAR}, #{dealerPhone,jdbcType=VARCHAR}, 
+      #{checkinType,jdbcType=VARCHAR}, #{rentTime,jdbcType=VARCHAR}, #{lookType,jdbcType=VARCHAR}, 
+      #{floor,jdbcType=VARCHAR}, #{elevator,jdbcType=VARCHAR}, #{carPos,jdbcType=VARCHAR}, 
+      #{water,jdbcType=VARCHAR}, #{electricity,jdbcType=VARCHAR}, #{gas,jdbcType=VARCHAR}, 
+      #{facility,jdbcType=VARCHAR}, #{nearby,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.peter.bean.House">
+    insert into house
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="pageId != null">
+        page_id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="houseCode != null">
+        house_code,
+      </if>
+      <if test="releaseTime != null">
+        release_time,
+      </if>
+      <if test="businessLicense != null">
+        business_license,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="payType != null">
+        pay_type,
+      </if>
+      <if test="tags != null">
+        tags,
+      </if>
+      <if test="rentType != null">
+        rent_type,
+      </if>
+      <if test="roomType != null">
+        room_type,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="direction != null">
+        direction,
+      </if>
+      <if test="dealerName != null">
+        dealer_name,
+      </if>
+      <if test="dealerCompany != null">
+        dealer_company,
+      </if>
+      <if test="dealerType != null">
+        dealer_type,
+      </if>
+      <if test="dealerPhone != null">
+        dealer_phone,
+      </if>
+      <if test="checkinType != null">
+        checkin_type,
+      </if>
+      <if test="rentTime != null">
+        rent_time,
+      </if>
+      <if test="lookType != null">
+        look_type,
+      </if>
+      <if test="floor != null">
+        floor,
+      </if>
+      <if test="elevator != null">
+        elevator,
+      </if>
+      <if test="carPos != null">
+        car_pos,
+      </if>
+      <if test="water != null">
+        water,
+      </if>
+      <if test="electricity != null">
+        electricity,
+      </if>
+      <if test="gas != null">
+        gas,
+      </if>
+      <if test="facility != null">
+        facility,
+      </if>
+      <if test="nearby != null">
+        nearby,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="pageId != null">
+        #{pageId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="houseCode != null">
+        #{houseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseTime != null">
+        #{releaseTime,jdbcType=DATE},
+      </if>
+      <if test="businessLicense != null">
+        #{businessLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="payType != null">
+        #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null">
+        #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="rentType != null">
+        #{rentType,jdbcType=VARCHAR},
+      </if>
+      <if test="roomType != null">
+        #{roomType,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=DOUBLE},
+      </if>
+      <if test="direction != null">
+        #{direction,jdbcType=VARCHAR},
+      </if>
+      <if test="dealerName != null">
+        #{dealerName,jdbcType=VARCHAR},
+      </if>
+      <if test="dealerCompany != null">
+        #{dealerCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="dealerType != null">
+        #{dealerType,jdbcType=VARCHAR},
+      </if>
+      <if test="dealerPhone != null">
+        #{dealerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="checkinType != null">
+        #{checkinType,jdbcType=VARCHAR},
+      </if>
+      <if test="rentTime != null">
+        #{rentTime,jdbcType=VARCHAR},
+      </if>
+      <if test="lookType != null">
+        #{lookType,jdbcType=VARCHAR},
+      </if>
+      <if test="floor != null">
+        #{floor,jdbcType=VARCHAR},
+      </if>
+      <if test="elevator != null">
+        #{elevator,jdbcType=VARCHAR},
+      </if>
+      <if test="carPos != null">
+        #{carPos,jdbcType=VARCHAR},
+      </if>
+      <if test="water != null">
+        #{water,jdbcType=VARCHAR},
+      </if>
+      <if test="electricity != null">
+        #{electricity,jdbcType=VARCHAR},
+      </if>
+      <if test="gas != null">
+        #{gas,jdbcType=VARCHAR},
+      </if>
+      <if test="facility != null">
+        #{facility,jdbcType=VARCHAR},
+      </if>
+      <if test="nearby != null">
+        #{nearby,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.peter.bean.House">
+    update house
+    <set>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="pageId != null">
+        page_id = #{pageId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="houseCode != null">
+        house_code = #{houseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseTime != null">
+        release_time = #{releaseTime,jdbcType=DATE},
+      </if>
+      <if test="businessLicense != null">
+        business_license = #{businessLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="payType != null">
+        pay_type = #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null">
+        tags = #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="rentType != null">
+        rent_type = #{rentType,jdbcType=VARCHAR},
+      </if>
+      <if test="roomType != null">
+        room_type = #{roomType,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=DOUBLE},
+      </if>
+      <if test="direction != null">
+        direction = #{direction,jdbcType=VARCHAR},
+      </if>
+      <if test="dealerName != null">
+        dealer_name = #{dealerName,jdbcType=VARCHAR},
+      </if>
+      <if test="dealerCompany != null">
+        dealer_company = #{dealerCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="dealerType != null">
+        dealer_type = #{dealerType,jdbcType=VARCHAR},
+      </if>
+      <if test="dealerPhone != null">
+        dealer_phone = #{dealerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="checkinType != null">
+        checkin_type = #{checkinType,jdbcType=VARCHAR},
+      </if>
+      <if test="rentTime != null">
+        rent_time = #{rentTime,jdbcType=VARCHAR},
+      </if>
+      <if test="lookType != null">
+        look_type = #{lookType,jdbcType=VARCHAR},
+      </if>
+      <if test="floor != null">
+        floor = #{floor,jdbcType=VARCHAR},
+      </if>
+      <if test="elevator != null">
+        elevator = #{elevator,jdbcType=VARCHAR},
+      </if>
+      <if test="carPos != null">
+        car_pos = #{carPos,jdbcType=VARCHAR},
+      </if>
+      <if test="water != null">
+        water = #{water,jdbcType=VARCHAR},
+      </if>
+      <if test="electricity != null">
+        electricity = #{electricity,jdbcType=VARCHAR},
+      </if>
+      <if test="gas != null">
+        gas = #{gas,jdbcType=VARCHAR},
+      </if>
+      <if test="facility != null">
+        facility = #{facility,jdbcType=VARCHAR},
+      </if>
+      <if test="nearby != null">
+        nearby = #{nearby,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.peter.bean.House">
+    update house
+    set url = #{url,jdbcType=VARCHAR},
+      page_id = #{pageId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      house_code = #{houseCode,jdbcType=VARCHAR},
+      release_time = #{releaseTime,jdbcType=DATE},
+      business_license = #{businessLicense,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      pay_type = #{payType,jdbcType=VARCHAR},
+      tags = #{tags,jdbcType=VARCHAR},
+      rent_type = #{rentType,jdbcType=VARCHAR},
+      room_type = #{roomType,jdbcType=VARCHAR},
+      area = #{area,jdbcType=DOUBLE},
+      direction = #{direction,jdbcType=VARCHAR},
+      dealer_name = #{dealerName,jdbcType=VARCHAR},
+      dealer_company = #{dealerCompany,jdbcType=VARCHAR},
+      dealer_type = #{dealerType,jdbcType=VARCHAR},
+      dealer_phone = #{dealerPhone,jdbcType=VARCHAR},
+      checkin_type = #{checkinType,jdbcType=VARCHAR},
+      rent_time = #{rentTime,jdbcType=VARCHAR},
+      look_type = #{lookType,jdbcType=VARCHAR},
+      floor = #{floor,jdbcType=VARCHAR},
+      elevator = #{elevator,jdbcType=VARCHAR},
+      car_pos = #{carPos,jdbcType=VARCHAR},
+      water = #{water,jdbcType=VARCHAR},
+      electricity = #{electricity,jdbcType=VARCHAR},
+      gas = #{gas,jdbcType=VARCHAR},
+      facility = #{facility,jdbcType=VARCHAR},
+      nearby = #{nearby,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

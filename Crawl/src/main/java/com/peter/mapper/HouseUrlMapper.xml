@@ -28,6 +28,13 @@
 		from house_url
 		where id = #{id,jdbcType=INTEGER}
 	</select>
+	<select id="selectByPageId"
+		parameterType="java.lang.Integer" resultMap="houseUrlPageResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from house_url
+		where page_id = #{page_id,jdbcType=INTEGER}
+	</select>
 	<select id="selectAll" resultMap="houseUrlPageResultMap">
 		select
 		<include refid="Base_Column_List" />

@@ -1,0 +1,1 @@
+/home/icss/application/sqoop1.4/bin/sqoop export --connect 'jdbc:mysql://slave01:3306/live?useUnicode=true&characterEncoding=utf-8' --username 'root' --password 'cheng0526' --table recommand --columns user_id,house_id,score --export-dir /user/hive/warehouse/recommand.db/result_mysql --input-fields-terminated-by ','

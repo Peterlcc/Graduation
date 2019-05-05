@@ -1,0 +1,1 @@
+/home/icss/application/sqoop1.4/bin/sqoop import --connect jdbc:mysql://slave01:3306/live --username 'root' --password 'cheng0526' --query 'SELECT user_id,house_id,score from score where $CONDITIONS' --target-dir '/user/sqoop/tmp/score' --m 3 --split-by user_id --direct --fields-terminated-by ',' 

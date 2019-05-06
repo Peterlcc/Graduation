@@ -1,5 +1,7 @@
 package com.peter.mapper;
 
+import java.util.List;
+
 import com.peter.bean.Collect;
 
 public interface CollectMapper {
@@ -11,7 +13,12 @@ public interface CollectMapper {
 
     Collect selectByPrimaryKey(Integer id);
 
+    List<Collect> selectCollectsByUserId(Integer userId);
+    
     int updateByPrimaryKeySelective(Collect record);
 
     int updateByPrimaryKey(Collect record);
+    
+    int selectCollectNumByHouseId(Integer houseId);
+    
 }

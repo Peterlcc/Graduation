@@ -38,9 +38,12 @@
     </constructor>
   </resultMap>
   <resultMap type="com.peter.bean.House" id="imgHouseResultMap" extends="BaseResultMap">
-  	<association property="imgUrls"
-			javaType="list"
-			select="com.peter.mapper.ImgMapper.selectByHouseId" column="id"></association>
+	<association property="logNum" javaType="int" select="com.peter.mapper.LogMapper.selectLogNumByHouseId" column="id"></association>
+	<association property="collectNum" javaType="int" select="com.peter.mapper.CollectMapper.selectCollectNumByHouseId" column="id"></association>
+	<association property="phoneNum" javaType="int" select="com.peter.mapper.PhoneMapper.selectPhoneNumByHouseId" column="id"></association>
+  	<collection property="imgUrls"
+			ofType="string"
+			select="com.peter.mapper.ImgMapper.selectByHouseId" column="id"></collection>
   </resultMap>
   <sql id="Base_Column_List">
     id, url, title, house_code, release_time, business_license, price, pay_type, tags, 

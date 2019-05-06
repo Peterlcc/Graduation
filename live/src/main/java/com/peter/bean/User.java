@@ -1,5 +1,7 @@
 package com.peter.bean;
 
+import java.util.List;
+
 public class User {
     private Integer id;
 
@@ -14,6 +16,11 @@ public class User {
     private String email;
 
     private Integer majorId;
+    private Major major;
+    
+    private List<Log> logs;
+    private List<Collect> collects;
+    private List<Phone> phones;
 
     public User(Integer id, String name, String password, String sex, Integer age, String email, Integer majorId) {
         this.id = id;
@@ -26,10 +33,52 @@ public class User {
     }
 
     public User() {
-        super();
     }
+    
+	public void clone(User user) {
+		this.id = user.id;
+        this.name = user.name;
+        this.password = user.password;
+        this.sex = user.sex;
+        this.age = user.age;
+        this.email = user.email;
+        this.majorId = user.majorId;
+	}
 
-    public Integer getId() {
+
+	public Major getMajor() {
+		return major;
+	}
+
+	public void setMajor(Major major) {
+		this.major = major;
+	}
+
+	public List<Log> getLogs() {
+		return logs;
+	}
+
+	public void setLogs(List<Log> logs) {
+		this.logs = logs;
+	}
+
+	public List<Collect> getCollects() {
+		return collects;
+	}
+
+	public void setCollects(List<Collect> collects) {
+		this.collects = collects;
+	}
+
+	public List<Phone> getPhones() {
+		return phones;
+	}
+
+	public void setPhones(List<Phone> phones) {
+		this.phones = phones;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -88,7 +137,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", password=" + password + ", sex=" + sex + ", age=" + age
-				+ ", email=" + email + ", majorId=" + majorId + "]";
+				+ ", email=" + email + ", majorId=" + majorId + ", major=" + major.getName() + "]";
 	}
-    
+
 }

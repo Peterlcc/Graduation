@@ -8,26 +8,54 @@
       <arg column="house_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
+  <resultMap id="HousePhoneResultMap" type="com.peter.bean.Log" extends="BaseResultMap">
+    <association property="house" javaType="com.peter.bean.House" select="com.peter.mapper.HouseMapper.selectByPrimaryKey" column="house_id"></association>
+  </resultMap>
+  <resultMap id="UserPhoneResultMap" type="com.peter.bean.Log" extends="BaseResultMap">
+    <association property="user" javaType="com.peter.bean.User" select="com.peter.mapper.UserMapper.selectByPrimaryKey" column="user_id"></association>
+  </resultMap>
+  <resultMap id="UserAndHousePhoneResultMap" type="com.peter.bean.Log" extends="BaseResultMap">
+    <association property="user" javaType="com.peter.bean.User" select="com.peter.mapper.UserMapper.selectByPrimaryKey" column="user_id"></association>
+    <association property="house" javaType="com.peter.bean.House" select="com.peter.mapper.HouseMapper.selectByPrimaryKey" column="house_id"></association>
+  </resultMap>
   <sql id="Base_Column_List">
     id, user_id, house_id
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="HousePhoneResultMap">
     select 
     <include refid="Base_Column_List" />
     from phone
     where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectPhonesByUserId" parameterType="java.lang.Integer" resultMap="HousePhoneResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from phone
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <select id="selectPhoneNumByHouseId" parameterType="java.lang.Integer" resultType="int">
+    select 
+    count(1)
+    from phone
+    where house_id = #{houseId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from phone
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.peter.bean.Phone">
+    <selectKey keyProperty="id" order="AFTER" resultType="int">
+    select last_insert_id();
+    </selectKey>
     insert into phone (id, user_id, house_id
       )
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{houseId,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.peter.bean.Phone">
+    <selectKey keyProperty="id" order="AFTER" resultType="int">
+    select last_insert_id();
+    </selectKey>
     insert into phone
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

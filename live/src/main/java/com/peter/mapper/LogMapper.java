@@ -1,5 +1,7 @@
 package com.peter.mapper;
 
+import java.util.List;
+
 import com.peter.bean.Log;
 
 public interface LogMapper {
@@ -11,7 +13,11 @@ public interface LogMapper {
 
     Log selectByPrimaryKey(Integer id);
 
+    List<Log> selectLogsByUserId(Integer userId);
+    
     int updateByPrimaryKeySelective(Log record);
 
     int updateByPrimaryKey(Log record);
+    
+    int selectLogNumByHouseId(Integer houseId);
 }

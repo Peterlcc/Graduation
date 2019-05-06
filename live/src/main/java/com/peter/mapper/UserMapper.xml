@@ -12,14 +12,26 @@
       <arg column="major_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
+  <resultMap type="com.peter.bean.User" id="UserResultMap" extends="BaseResultMap">
+  	<association property="major" javaType="com.peter.bean.Major" select="com.peter.mapper.MajorMapper.selectByPrimaryKey" column="major_id"></association>
+  	<collection property="logs" ofType="com.peter.bean.Log" select="com.peter.mapper.LogMapper.selectLogsByUserId" column="id"></collection>
+  	<collection property="collects" ofType="com.peter.bean.Collect" select="com.peter.mapper.CollectMapper.selectCollectsByUserId" column="id"></collection>
+  	<collection property="phones" ofType="com.peter.bean.Phone" select="com.peter.mapper.PhoneMapper.selectPhonesByUserId" column="id"></collection>
+  </resultMap>
   <sql id="Base_Column_List">
     id, name, password, sex, age, email, major_id
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="UserResultMap">
     select 
     <include refid="Base_Column_List" />
     from users
     where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByName" parameterType="java.lang.String" resultMap="UserResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from users
+    where name = #{name,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from users

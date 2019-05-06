@@ -70,8 +70,36 @@ public class House {
     private Integer page;
     private List<String> imgUrls;
     
+    private Integer logNum;
+    private Integer collectNum;
+    private Integer phoneNum;
+    
 
-    public List<String> getImgUrls() {
+    public Integer getLogNum() {
+		return logNum;
+	}
+
+	public void setLogNum(Integer logNum) {
+		this.logNum = logNum;
+	}
+
+	public Integer getCollectNum() {
+		return collectNum;
+	}
+
+	public void setCollectNum(Integer collectNum) {
+		this.collectNum = collectNum;
+	}
+
+	public Integer getPhoneNum() {
+		return phoneNum;
+	}
+
+	public void setPhoneNum(Integer phoneNum) {
+		this.phoneNum = phoneNum;
+	}
+
+	public List<String> getImgUrls() {
 		return imgUrls;
 	}
 
@@ -384,9 +412,8 @@ public class House {
 				+ ", rentTime=" + rentTime + ", lookType=" + lookType + ", floor=" + floor + ", elevator=" + elevator
 				+ ", carPos=" + carPos + ", water=" + water + ", electricity=" + electricity + ", gas=" + gas
 				+ ", facility=" + facility + ", nearby=" + nearby + ", city=" + city + ", areaCity=" + areaCity
-				+ ", street=" + street + ", page=" + page + ", imgUrls=" + imgUrls + "]";
+				+ ", street=" + street + ", page=" + page + ", imgUrls=" + imgUrls + ", logNum=" + logNum
+				+ ", collectNum=" + collectNum + ", phoneNum=" + phoneNum + "]";
 	}
-
-	
     
 }

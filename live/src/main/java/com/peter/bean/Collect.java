@@ -4,8 +4,10 @@ public class Collect {
     private Integer id;
 
     private Integer userId;
+    private User user;
 
     private Integer houseId;
+    private House house;
 
     public Collect(Integer id, Integer userId, Integer houseId) {
         this.id = id;
@@ -14,10 +16,27 @@ public class Collect {
     }
 
     public Collect() {
-        super();
     }
 
-    public Integer getId() {
+    
+    
+    public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public House getHouse() {
+		return house;
+	}
+
+	public void setHouse(House house) {
+		this.house = house;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -40,4 +59,10 @@ public class Collect {
     public void setHouseId(Integer houseId) {
         this.houseId = houseId;
     }
+
+	@Override
+	public String toString() {
+		return "Collect [id=" + id + ", userId=" + userId + ", houseId=" + houseId + "]";
+	}
+    
 }

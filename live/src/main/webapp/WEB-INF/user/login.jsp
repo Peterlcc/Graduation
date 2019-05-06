@@ -1,20 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     isELIgnored="false" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>iLive|登录</title>
+        <title>Live|登录</title>
 
         <!-- CSS -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-        <link rel="stylesheet" href="./css/bootstrap.min.css">
-        <link rel="stylesheet" href="./css/font-awesome.min.css">
+        <link rel="stylesheet" href="../../resource/user/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../resource/user/css/font-awesome.min.css">
 		<!--<link rel="stylesheet" href="css/form-elements.css">-->
-        <link rel="stylesheet" href="./css/loginstyle.css">
+        <link rel="stylesheet" href="../../resource/user/css/loginstyle.css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -22,9 +22,9 @@
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-        <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" /><!-- Bootstrap stylesheet -->
-        <link href="./css/style.css" rel="stylesheet" type="text/css" media="all" /><!-- stylesheet -->
-        <link href="./css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" /><!-- fontawesome -->
+        <link href="../../resource/user/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" /><!-- Bootstrap stylesheet -->
+        <link href="../../resource/user/css/style.css" rel="stylesheet" type="text/css" media="all" /><!-- stylesheet -->
+        <link href="../../resource/user/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" /><!-- fontawesome -->
 
         <!-- meta tags -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,21 +37,21 @@
         <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
         <!--//fonts-->
-        <script type="text/javascript" src="js/jquery-2.1.4.min.js">
+        <script type="text/javascript" src="../../resource/user/js/jquery-2.1.4.min.js">
             //
 
         </script><!-- Required-js -->
-        <script src="./js/bootstrap.min.js"></script><!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="../../resource/user/js/bootstrap.js"></script><!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <!-- Include jQuery & Filterizr -->
 
-        <script src="./js/jquery.filterizr.js"></script>
-        <script src="./js/controls.js"></script>
+        <script src="../../resource/user/js/jquery.filterizr.js"></script>
+        <script src="../../resource/user/js/controls.js"></script>
 
         <!-- Kick off Filterizr -->
         <script type="text/javascript">
             $(function() {
                 //Initialize filterizr with default options
-                $('.filtr-container').filterizr();
+                //$('.filtr-container').filterizr();
             });
         </script>
         <!-- here stars scrolling icon -->
@@ -70,8 +70,8 @@
             });
         </script>
         <!-- start-smoth-scrolling -->
-        <script type="text/javascript" src="./js/move-top.js"></script>
-        <script type="text/javascript" src="./js/easing.js"></script>
+        <script type="text/javascript" src="../../resource/user/js/move-top.js"></script>
+        <script type="text/javascript" src="../../resource/user/js/easing.js"></script>
         <script type="text/javascript">
             jQuery(document).ready(function($) {
                 $(".scroll").click(function(event){
@@ -113,13 +113,13 @@
                 </div>
                 <!-- /.container-fluid -->
             </nav>
-            <script src="js/nav.js"></script><!-- nav-js -->
+            <script src="../../resource/user/js/nav.js"></script><!-- nav-js -->
             <!-- //nav -->
         </div>
     </header>
     <!-- //header -->
         <!-- Top content -->
-        <div class="top-content" style="max-width: 100%; background:url(images/backgroundimg.jpg);
+        <div class="top-content" style="max-width: 100%; background:url(../../resource/user/images/backgroundimg.jpg);
         background-position:center;background-repeat: no-repeat;background-attachment: scroll;background-size: cover;">
         	
             <div class="inner-bg">
@@ -127,36 +127,36 @@
                     <div class="row">
                         <div class="titlelogin" style="text-align: center;color: white">
                             <h2> 登录</h2>
-                            
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-4 col-sm-offset-4 form-box">
                         	
                             <div class="form-bottom">
-			                    <form role="form"  method="post" class="login-form">
+			                    <form role="form"  method="post" class="login-form" action="<c:url value='/user/getin'></c:url>">
 			                    	<div class="form-group">
 			                    		<label class="sr-only">Username</label>
-			                        	<input type="text" id="username"  name="form-username" placeholder="用户名" class="form-username form-control" >
+			                        	<input type="text" id="username"  name="username" placeholder="用户名" class="form-username form-control" >
 			                        </div>
 			                        <div class="form-group">
 			                        	<label class="sr-only">Password</label>
-			                        	<input type="password" id="password"  name="form-psd" placeholder="密码" class="form-password form-control" >
+			                        	<input type="password" id="password"  name="password" placeholder="密码" class="form-password form-control" >
 			                        </div>
-			                        <button id="submit" type="button" class="btn" style="text-align: center;line-height: 2px; ">登录</button>
+			                        <center><input type="submit" value="登录" class="btn" style="text-align: center;line-height: 2px; background-color: #4aaf51;border: 1px solid transparent;width:100%;color: white;height: 35px"></center>
+			                        
+			                        <!-- <button id="submit" type="button"  class="btn" style="text-align: center;line-height: 2px;">登录</button> -->
                    		        
-                   		        	<div class="newregister" style="padding: 15px  0 0 170px">
-                   		       			<h5>没有注册账号？<a href="register.html">请注册</a></h5>	
+                   		        	<div class="newregister" style="padding: 15px  0 0 0px">
+                   		       			<h5><a hred="<c:url value='/user/forgotPassword'></c:url>">忘记密码？</a >
+                   		       			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   		       			<a style="text-align:right; !important" href="register.html">没有注册账号？请注册</a></h5>
                    		        	</div>
 			                    </form>
 		                    </div>
-                        	
                         </div>
                     </div>
-                    
                 </div>
             </div>
-            
         </div>
 
     <!-- footer -->
@@ -183,7 +183,7 @@
                         <ul>
                             <li>Hebut University</li>
                             <li>Telephone : secret</li>
-                            <li>Email : <a class="mail">We don't konw either.</a></li>
+                            <li>Email : <a class="mail">1414499216@qq.com</a></li>
                         </ul>
                     </address>
                 </div>
@@ -195,30 +195,9 @@
             <p class="footer">Copyright &copy; 2018.iLive All rights reserved. </p>
         </div>
     </footer>
+    
     <!-- //footer -->
     <a href="#" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 0;"></span>To Top</a>
-
-    <script>
-        $("#submit").click(function () {
-            var username=document.getElementById("username").value;
-            var password=document.getElementById("password").value;
-
-            $.ajax({
-                url: "/user/login",
-                dataType:"json",
-                data: {username:username, password: password},
-                type: "POST",
-                success:function (result) {
-                   if(result.result==false){
-                	   alert("用户名或密码错误！");
-                	   window.location.href="login.html";
-                     }
-                   else { window.location.href="properties.html";}
-                }
-            })
-        })
-    </script>
-
     </body>
 
 </html>

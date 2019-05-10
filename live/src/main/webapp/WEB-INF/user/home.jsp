@@ -1,255 +1,64 @@
+<%@page import="java.util.TreeMap"%>
+<%@page import="net.bytebuddy.asm.Advice.This"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     isELIgnored="false" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>iLive|快速租房好帮手</title>
-<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" /><!-- Bootstrap stylesheet -->
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" /><!-- stylesheet -->
-<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" /><!-- fontawesome -->  
-<!-- meta tags -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>iLive|快速租房好帮手</title>
+	<link href="../../resource/user/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" /><!-- Bootstrap stylesheet -->
+	<link href="../../resource/user/css/style.css" rel="stylesheet" type="text/css" media="all" /><!-- stylesheet -->
+	<link href="../../resource/user/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" /><!-- fontawesome -->  
+	<!-- meta tags -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="referrer" content="no-referrer" />
 	<meta name="keywords" content="" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- //meta tags -->
-<!--fonts-->
-<link href="http://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
-<link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-<!--//fonts-->
-    <script src="js/jquery.min.js" type="text/javascript"></script>
-	<script  type="text/javascript">
-        function getJsonLength(json){
-            var length = 0;
-            for(var attr in json){
-                length++;
-            }
-            return length;
-            console.log(length);
-        }
-       
-        
-        function addDetail(result) {
-      
-        	var classDiv= $("#parenthouse").children("div");
-            var divsPrice=document.getElementsByClassName("jm-item-title");
-            var divsTitle=document.getElementsByClassName("agile-its-property-title");
-            var divsSrc=document.getElementsByClassName("imgsrc");
-            var spansId=document.getElementsByClassName("jm-item-id");
-            
-             for(var i=0;i<9;i++)
-			{
-				classDiv[i].style="display:block";
-			} 
-             if(getJsonLength(result.houses)<9)
-            	{
-            		for(var i=getJsonLength(result.houses);i<9;i++)
-            				classDiv[i].style="display:none";
-            	}
-            	 
-            for(var i = 0; i<getJsonLength(result.houses); i++){
-       
-                divsPrice[i].innerText='￥'+result.houses[i].price;
-               // console.log(divsPrice[i]);
-                divsTitle[i].innerText=result.houses[i].title;
-                divsSrc[i].src=result.houses[i].imgs[0];
-                //console.log(divsSrc[i].src);
-                spansId[i].innerText=result.houses[i].id;
-                //console.log(spansId[i].innerText);
-//                console.log(getJsonLength(result)+'+'+divsSrc[i].src);
-                if(divsSrc[i].src=="http://localhost:8080/undefined")
-                	{
-                		divsSrc[i].src="images/imgback.jpg";
-                	}
-            }
-        }
+	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<!--fonts-->
+	<link href="http://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+	<!--//fonts-->
+    <script src="../../resource/user/js/jquery.min.js" type="text/javascript"></script>
+    <!-- Include jQuery & Filterizr -->
+	<script type="text/javascript" src="../../resource/user/js/jquery-2.1.4.min.js"></script><!-- Required-js -->
+	<script src="../../resource/user/js/bootstrap.min.js"></script><!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+    <script src="../../resource/user/js/controls.js"></script>
+	<!-- 页面显示的初始化 -->
+	<!-- //here ends scrolling icon -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+				var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear'
+				};				
+			});
 	</script>
 	<script type="text/javascript">
-	function userselecta() {
-    	var userSelectall="全部";
-        userSelecta=this.innerHTML;
-        $.ajax({
-            type: "POST",
-            url: "/house/listByRegion",
-            dataType: "json",
-            data:{region:userSelecta,start:1 },
-            success: function(result){
-            	//console.log("success!");
-                addDetail(result);
-            }
-        })
-    }
-	function userselectb() {
-    	//console.log("45353465");
-    	var userSelectb="全部";
-        userSelectb=this.innerHTML;
-        //  console.log(userSelectb);
-        $.ajax({
-            type: "POST",
-            url: "/house/listByPrice",
-            dataType: "json",
-            data:{interval:userSelectb,start:1},
-            success: function(result){
-                addDetail(result);
-            }
-        })
-    }
-	function userselectc() {
-    	var userSelectc="全部";
-        userSelectc=this.innerHTML;
-      //  console.log(userSelectc);
-        $.ajax({
-            type: "POST",
-            url: "/house/listByArea",
-            dataType: "json",
-            data:{interval:userSelectc,start:1},
-            success: function(result){
-            	//console.log(result);
-                addDetail(result);
-            }
-        })
-    }
-	
-	function userselectall() {
-     
-        $.ajax({
-            type: "POST",
-            url: "/house/listAll",
-            dataType: "json",
-            data:{pagestr:""},
-            success: function(result){
-            	//console.log(result);
-                addDetail(result);
-            }
-        })
-    }
-	
-	
-	
-/* 	function addinput(){
-		  var inputpage=document.getElementById("inputPage").value;
-		  (inputpage);
-               /*  $(".zxf_pagediv a").on("click",addpage);  */
-                /* $(".zxf_pagediv button").on("click",addinput);  */
-	
-	
-	function addpage(){
-    	var pageChangeTo=$(this).text();
-    	//alert(pageChangeTo);
-    	if(pageChangeTo=="确定"){pageChangeTo=document.getElementById("inputPage").value;}
-    	//alert(pageChangeTo);
-         $.ajax({
-            type: "POST",
-            url: "/house/listAll",
-            dataType: "json",
-            data:{pagestr:pageChangeTo},
-            success: function(result){
-            	console.log(result);
-                addDetail(result);
-                $(".zxf_pagediv a,button").on("click",addpage); 
-                
-            }
-        }) 
-    }
-	
-        window.onload=function () {
-        	var aList=document.getElementById("dropdownLista").getElementsByTagName("a");
-        	var bList=document.getElementById("dropdownListb").getElementsByTagName("a");
-        	var cList=document.getElementById("dropdownListc").getElementsByTagName("a");
-        	var allitem=document.getElementById("allitem");
-     //       console.log(aList);
-    			 allitem.onclick=userselectall;
-    			 
-              for(var i=0;i<aList.length;i++){
-                 aList[i].onclick=userselecta;
-              } 
-              for(var i=0;i<bList.length;i++){
-                  bList[i].onclick=userselectb;
-               } 
-              for(var i=0;i<cList.length;i++){
-                  cList[i].onclick=userselectc;
-               } 
-          //   console.log(aList);
-            $(function(){
-                $.ajax({
-                    type: "POST",
-                    url: "/house/listAll",
-                    dataType: "json",
-                    data:{pagestr:""},
-                    success: function(result){
-                    	//console.log(result);
-                    	if(result.error=="undefined"){
-                    		alert("请登录！");
-                    		refresh();
-                    	}
-                    	document.getElementById("getusername").innerText=result.username;
-                    	 // alert(result.count);
-                          $(".zxf_pagediv").createPage({
-                            pageNum: result.count,
-                            current: 1,
-                            backfun: function(e) {
-                             	
-                                 //console.log(e);//回调
-                             } 
-                         });  
-                      //    console.log(document.getElementsByClassName("zxf_pagediv"));
-                        addDetail(result);  
-                        $(".zxf_pagediv a,button").on("click",addpage); 
-                    }
-                })
-            })
-            
-        }
-        
-        
+		jQuery(document).ready(function($) {
+			$(".scroll").click(function(event){		
+				event.preventDefault();
+				$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+			});
+		});
 	</script>
-
-<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script><!-- Required-js -->
-<script src="js/bootstrap.min.js"></script><!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <!-- Include jQuery & Filterizr -->
-
-    <!--<script src="js/jquery.filterizr.js" ></script>-->
-    <script src="js/controls.js"></script>
-
-    <!-- Kick off Filterizr -->
-    <!--<script type="text/javascript">-->
-        <!--$(function() {-->
-            <!--//Initialize filterizr with default options-->
-            <!--$('.filtr-container').filterizr();-->
-        <!--});-->
-    <!--/*</script>*/-->
-	<!-- here stars scrolling icon -->
-			<script type="text/javascript">
-				$(document).ready(function() {
-
-						var defaults = {
-						containerID: 'toTop', // fading element id
-						containerHoverID: 'toTopHover', // fading element hover id
-						scrollSpeed: 1200,
-						easingType: 'linear'
-						};
-
-										
-//					$().UItoTop({ easingType: 'easeOutQuart' });
-										
-					});
-			</script>
-			<!-- start-smoth-scrolling -->
-			<script type="text/javascript" src="js/move-top.js"></script>
-			<script type="text/javascript" src="js/easing.js"></script>
-			<script type="text/javascript">
-				jQuery(document).ready(function($) {
-					$(".scroll").click(function(event){		
-						event.preventDefault();
-						$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-					});
-				});
-			</script>
-			<!-- start-smoth-scrolling -->
-		<!-- //here ends scrolling icon -->
-
+	
+	<!-- start-smoth-scrolling -->
+	<script type="text/javascript" src="../../resource/user/js/move-top.js"></script>
+	<script type="text/javascript" src="../../resource/user/js/easing.js"></script>
+	<!-- start-smoth-scrolling -->
+	
+	<!-- 自定义的分页的css样式引用 -->
+	<link rel="stylesheet" href="../../resource/user/css/page.css" type="text/css">
+	<!-- 自定义的选择框的css样式引用 -->
+	<link rel="stylesheet" href="../../resource/user/css/conditon-select.css" type="text/css">
+	
+	<!-- 级联选择框 -->
+	<script type="text/javascript" src="../../resource/user/js/house-select.js"></script>
 </head>
 <body>
 	<!-- header -->
@@ -269,9 +78,9 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				  <ul class="nav navbar-nav">
-					<li class="active"><a href="properties.html" >主页</a></li>
+					<li class="active"><a href="/house/home" >主页</a></li>
 					
-					<li><a id="getusername">xxx</a></li>
+					<li><a id="getusername">${user.name}</a></li>
 					<li><a >欢迎登录</a></li>
 				  </ul>
 				</div>
@@ -279,7 +88,7 @@
 			  </div>
 			  <!-- /.container-fluid -->
 			</nav> 
-			<script src="js/nav.js"></script><!-- nav-js --> 
+			<script src="../../resource/user/js/nav.js"></script><!-- nav-js --> 
 			<!-- //nav -->
 		</div>
 	</header>
@@ -299,172 +108,87 @@
 	<div class="gallery" id="gallery">
 	<div class="container">
 		<div class="gallery_gds">
-			<ul id="dropdownList" class="simplefilter ">
-                <li   id="allitem" data-filter="all">全部</li>
-				<li  class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">区域 <b class="caret"></b></a>
-					<ul id="dropdownLista" class="dropdown-menu">
-						<li ><a >不限</a></li>
-						<li ><a >和平</a></li>
-						<li ><a >南开</a></li>
-                        <li ><a >河西</a></li>
-                        <li ><a >河北</a></li>
-                        <li ><a >河东</a></li>
-                        <li ><a >红桥</a></li>
-                        <li ><a >西青</a></li>
-                        <li ><a >北辰</a></li>
-                        <li ><a >东丽</a></li>
-                        <li ><a >津南</a></li>
-                        <li ><a >塘沽</a></li>
-                        <li ><a >开发区</a></li>
-                        <li ><a >武清</a></li>
-                        <li ><a >滨海新区</a></li>
-                        <li ><a >宝坻</a></li>
-                        <li ><a >蓟州</a></li>
-					</ul>
-				</li><!--区域-->
-                <li class="dropdown" >
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">租金 <b class="caret"></b></a>
-					<ul id="dropdownListb" class="dropdown-menu">
-                        <li ><a >不限</a></li>
-                        <li ><a >500元以下</a></li>
-                        <li ><a>500-800元</a></li>
-                        <li ><a >800-1500元</a></li>
-                        <li ><a >1500-2000元</a></li>
-                        <li ><a >2000-3000元</a></li>
-                        <li ><a >3000-5000元</a></li>
-                        <li ><a >5000元以上</a></li>
-					</ul>
-				</li><!--租金-->
-                <li class="dropdown" >
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">面积 <b class="caret"></b></a>
-                    <ul id="dropdownListc" class="dropdown-menu">
-                        <li ><a >不限</a></li>
-                        <li ><a >50平以下</a></li>
-                        <li ><a >50-70平</a></li>
-                        <li ><a >70-90平</a></li>
-                        <li ><a >90-110平</a></li>
-                        <li ><a >110-130平</a></li>
-                        <li ><a >130-150平</a></li>
-                        <li ><a>150平以上</a></li>
-                    </ul>
-				</li><!--面积-->
-
-            </ul>   
+		<form action="/house/home" method="get">
+			<h5 class="select-title" >区域</h5>
+			<c:if test="${not empty houseQueryVo.house }">
+					<c:if test="${not empty houseQueryVo.house.areaCity}">
+						<c:set var="areaStr" value="${houseQueryVo.house.areaCity}"></c:set>
+					</c:if>
+			</c:if>
+			<select class="condition-select" onchange="areaSearch(this);" id="areaSelect" name="area" data-selector>
+				<option value="">请选择</option>
+				<c:forEach items="${city.areas}" var="area">
+					<c:choose>
+						<c:when test="${area.name eq areaStr}">
+							<option class="area" selected="selected" value="${area.name }">${area.name }</option>
+						</c:when>
+						<c:otherwise>
+							<option class="area" value="${area.name }">${area.name }</option>
+						</c:otherwise>
+					</c:choose>
+					
+				</c:forEach>
+			</select>
+			&nbsp;&nbsp;
+			<h5 class="select-title">街道</h5>
+			<c:if test="${not empty houseQueryVo.house }">
+					<c:if test="${not empty houseQueryVo.house.street}">
+						<c:set var="streetStr" value="${houseQueryVo.house.street}"></c:set>
+					</c:if>
+			</c:if>
+			<select class="condition-select" id="streetSelect" name="street" data-selector>
+				<option value="">请选择</option>
+				<c:if test="${not empty streetStr}">
+					<option class="street" selected="selected" value="${streetStr }">${streetStr }</option>
+				</c:if>
+			</select>
+			&nbsp;&nbsp;
+			<h5 class="select-title">价位</h5>
+			<%
+			java.util.Map<String, String> priceStrs=new TreeMap<>();
+			priceStrs.put("0-500", "500元以下");
+			priceStrs.put("500-1000", "500-1000元");
+			priceStrs.put("1000-2000", "1000-2000元");
+			priceStrs.put("2000-3000", "2000-3000元");
+			priceStrs.put("3000-4000", "3000-4000元");
+			priceStrs.put("4000-5000", "4000-5000元");
+			priceStrs.put("5000", "5000元以上");
+			%>
+			<select class="condition-select" id=priceSelect name="price" data-selector>
+				<option value="">请选择</option>
+				<%
+				String priceStr=(String)request.getAttribute("priceStr");
+				for(String key:priceStrs.keySet())
+				{
+					out.print("<option class='price' "+(key.equals(priceStr)?"selected='selected'":"")+" value="+key+">"+priceStrs.get(key)+"</option>");
+				} %>
+			</select>
+			<input id="search" onclick="search();" class="submit-select" type="submit" value="查找">
+		</form>
             <div class="filtr-container " id="parenthouse" style="padding: 0px; position: relative; height: 858px;">
-				<div class="col-md-4 col-ms-6 jm-item first filtr-item"  style="opacity: 1; transform: scale(1) translate3d(0px, 0px, 0px); backface-visibility: hidden; perspective: 1000px; transform-style: preserve-3d; position: absolute; transition: all 0.5s ease-out 0ms;">
-					<div class="jm-item-wrapper" >
-						<span class="jm-item-id" style="display: none">id</span>
-						<div class="jm-item-image" >
-							<img class="imgsrc" src="images/imgback.jpg" alt="property" />
-							<span class="jm-item-overlay"> </span>
-							<div class="jm-item-button"><a>详细内容</a></div>
+            <%
+            int[] x=new int[]{0,380,760,0,380,760,0,380,760};
+            int[] y=new int[]{0,0,0,286,286,286,572,572,572};
+            int[] z=new int[]{0,0,0,0,0,0,0,0,0};
+            int scaleIndex=0;
+            %>
+				<c:forEach items="${houseQueryVo.pageBean.beanList}" var="bean">
+					<div class="col-md-4 col-ms-6 jm-item first filtr-item"  style="opacity: 1; transform: scale(1) translate3d(<%=x[scaleIndex] %>px, <%=y[scaleIndex] %>px, <%=z[scaleIndex] %>px); backface-visibility: hidden; perspective: 1000px; transform-style: preserve-3d; position: absolute; transition: all 0.5s ease-out 0ms;">
+						<div class="jm-item-wrapper" >
+							<span class="jm-item-id" style="display: none;">${bean.id}</span>
+							<div class="jm-item-image" >
+								<img class="imgsrc" src="${bean.imgUrls[0] }" alt="${bean.title }" />
+								<span class="jm-item-overlay"> </span>
+								<div class="jm-item-button"><a>详细内容</a></div>
+							</div>
+							<div class="jm-item-title">￥${bean.price }</div>
+							<a class="agile-its-property-title" >${bean.title }</a>
 						</div>
-						<div class="jm-item-title">$250</div>
-						<a class="agile-its-property-title" >Property 1</a>
-						</div>
-				</div>
-				<div class="col-md-4 col-ms-6 jm-item first filtr-item"  style="opacity: 1; transform: scale(1) translate3d(380px, 0px, 0px); backface-visibility: hidden; perspective: 1000px; transform-style: preserve-3d; position: absolute; transition: all 0.5s ease-out 0ms;">
-					<div class="jm-item-wrapper">
-						<span class="jm-item-id" style="display: none">id</span>
-						<div class="jm-item-image">
-							<img class="imgsrc" src="images/imgback.jpg" alt="property" />
-							<span class="jm-item-overlay"> </span>
-							<div class="jm-item-button"><a >详细内容</a></div>
-						</div>
-						<div class="jm-item-title">$380</div>
-						<a class="agile-its-property-title" >Property 2</a>
-                    </div>
-
-				</div>
-				<div class="col-md-4 col-ms-6 jm-item first filtr-item"  style="opacity: 1; transform: scale(1) translate3d(760px, 0px, 0px); backface-visibility: hidden; perspective: 1000px; transform-style: preserve-3d; position: absolute; transition: all 0.5s ease-out 0ms;">
-					<div class="jm-item-wrapper">
-						<span class="jm-item-id" style="display: none">id</span>
-						<div class="jm-item-image">
-							<img class="imgsrc" src="images/imgback.jpg" alt="property" />
-							<span class="jm-item-overlay"> </span>
-							<div class="jm-item-button"><a>详细内容</a></div>
-						</div>
-						<div class="jm-item-title">$410</div>
-						<a class="agile-its-property-title">Property 3</a>
-                    </div>
-				</div>
-				<div class="col-md-4 col-ms-6 jm-item first filtr-item"  style="opacity: 1; transform: scale(1) translate3d(0px, 286px, 0px); backface-visibility: hidden; perspective: 1000px; transform-style: preserve-3d; position: absolute; transition: all 0.5s ease-out 0ms;">
-					<div class="jm-item-wrapper">
-						<span class="jm-item-id" style="display: none">id</span>
-						<div class="jm-item-image">
-							<img class="imgsrc" src="images/imgback.jpg" alt="property" />
-							<span class="jm-item-overlay"> </span>
-							<div class="jm-item-button"><a >详细内容</a></div>
-						</div>
-						<div class="jm-item-title">$580</div>
-						<a class="agile-its-property-title">Property 4</a>
-                    </div>
-				</div>
-				<div class="col-md-4 col-ms-6 jm-item first filtr-item"  style="opacity: 1; transform: scale(1) translate3d(380px, 286px, 0px); backface-visibility: hidden; perspective: 1000px; transform-style: preserve-3d; position: absolute; transition: all 0.5s ease-out 0ms;">
-					<div class="jm-item-wrapper">
-						<span class="jm-item-id" style="display: none">id</span>
-						<div class="jm-item-image">
-							<img class="imgsrc" src="images/imgback.jpg" alt="property" />
-							<span class="jm-item-overlay"> </span>
-							<div class="jm-item-button"><a>详细内容</a></div>
-						</div>
-						<div class="jm-item-title">$310</div>
-						<a class="agile-its-property-title">Property 5</a>
 					</div>
-				</div>
-				<div class="col-md-4 col-ms-6 jm-item first filtr-item"  style="opacity: 1; transform: scale(1) translate3d(760px, 286px, 0px); backface-visibility: hidden; perspective: 1000px; transform-style: preserve-3d; position: absolute; transition: all 0.5s ease-out 0ms;">
-					<div class="jm-item-wrapper">
-						<span class="jm-item-id" style="display: none">id</span>
-						<div class="jm-item-image">
-							<img class="imgsrc" src="images/imgback.jpg" alt="property" />
-							<span class="jm-item-overlay"> </span>
-							<div class="jm-item-button"><a >详细内容</a></div>
-						</div>
-						<div class="jm-item-title">$810</div>
-						<a class="agile-its-property-title" >Property 6</a>
-                    </div>
-				</div>
-				<div class="col-md-4 col-ms-6 jm-item first filtr-item"  style="opacity: 1; transform: scale(1) translate3d(0px, 572px, 0px); backface-visibility: hidden; perspective: 1000px; transform-style: preserve-3d; position: absolute; transition: all 0.5s ease-out 0ms;">
-					<div class="jm-item-wrapper">
-						<span class="jm-item-id" style="display: none">id</span>
-						<div class="jm-item-image">
-							<img class="imgsrc" src="images/imgback.jpg" alt="property" />
-							<span class="jm-item-overlay"> </span>
-							<div class="jm-item-button"><a >详细内容</a></div>
-						</div>
-						<div class="jm-item-title">$599</div>
-						<a class="agile-its-property-title" >Property 7</a>
-                    </div>
-				</div>
-				<div class="col-md-4 col-ms-6 jm-item first filtr-item"  style="opacity: 1; transform: scale(1) translate3d(380px, 572px, 0px); backface-visibility: hidden; perspective: 1000px; transform-style: preserve-3d; position: absolute; transition: all 0.5s ease-out 0ms;">
-					<div class="jm-item-wrapper">
-						<span class="jm-item-id" style="display: none">id</span>
-						<div class="jm-item-image">
-							<img class="imgsrc" src="images/imgback.jpg" alt="property" />
-							<span class="jm-item-overlay"> </span>
-							<div class="jm-item-button"><a >详细内容</a></div>
-						</div>
-						<div class="jm-item-title">$699</div>
-						<a class="agile-its-property-title" >Property 8</a>
-                    </div>
-				</div>
-				<div class="col-md-4 col-ms-6 jm-item first filtr-item"  style="opacity: 1; transform: scale(1) translate3d(760px, 572px, 0px); backface-visibility: hidden; perspective: 1000px; transform-style: preserve-3d; position: absolute; transition: all 0.5s ease-out 0ms;">
-					<div class="jm-item-wrapper">
-						<span  class="jm-item-id" style="display: none">id</span>
-						<div class="jm-item-image">
-							<img id="find" class="imgsrc" src="images/imgback.jpg" alt="property" />
-							<span class="jm-item-overlay"> </span>
-							<div class="jm-item-button" ><a >详细内容</a></div>
-						</div>
-						<div class="jm-item-title">$699</div>
-						<a class="agile-its-property-title" >Property 9</a>
-					</div>
-				</div>
+					<%scaleIndex++; %> 
+				</c:forEach>
                <div class="clearfix"> </div>
             </div>
-
-
 		</div>
 	</div>
 
@@ -474,7 +198,53 @@
 
 	</div>
 <!-- //main-content -->
-    <div class="zxf_pagediv" style="padding: 30px 0 10px 0"></div>
+    <div class="center">
+    	<ul class="pagination">
+    	  <li><h5>第${houseQueryVo.pageBean.currentPage }页/共${houseQueryVo.pageBean.totalPage }页</h5></li>
+		  <li><a href="${houseQueryVo.pageBean.url }&pc=1">首页</a></li>
+		  <li>
+			<c:if test="${houseQueryVo.pageBean.currentPage>1 }">
+				<a href="${houseQueryVo.pageBean.url }&pc=${houseQueryVo.pageBean.currentPage-1 }">上一页</a>
+			</c:if>
+		  </li>
+		  <!-- begin和end 的设置 -->
+		  <c:choose>
+			<c:when test="${houseQueryVo.pageBean.totalPage<10 }">
+				<c:set var="begin" value="1"></c:set>
+				<c:set var="end" value="${houseQueryVo.pageBean.totalPage}"></c:set>
+			</c:when>
+			<c:otherwise>
+				<c:set var="begin" value="${houseQueryVo.pageBean.currentPage-5 }"></c:set>
+				<c:set var="end" value="${houseQueryVo.pageBean.currentPage+4 }"></c:set>
+				
+				<c:if test="${begin<1 }">
+					<c:set var="begin" value="1"></c:set>
+					<c:set var="end" value="10"></c:set>
+				</c:if>
+				
+				<c:if test="${end>houseQueryVo.pageBean.totalPage }">
+					<c:set var="begin" value="${houseQueryVo.pageBean.totalPage-9 }"></c:set>
+					<c:set var="end" value="${houseQueryVo.pageBean.totalPage}"></c:set>
+				</c:if>
+			</c:otherwise>
+		</c:choose>
+		<!-- 循环打印页标 -->
+		<c:forEach var="i" begin="${begin }" end="${end }">
+			<c:choose>
+				<c:when test="${i eq houseQueryVo.pageBean.currentPage}">
+					<li><a class="disable" href="javascript:void(0)">${i }</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="${houseQueryVo.pageBean.url }&pc=${i }">${i }</a></li>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		<c:if test="${houseQueryVo.pageBean.currentPage<houseQueryVo.pageBean.totalPage }">
+			<li><a href="${houseQueryVo.pageBean.url }&pc=${houseQueryVo.pageBean.currentPage+1 }">下一页</a></li>
+		</c:if>
+		<li><a href="${houseQueryVo.pageBean.url }&pc=${houseQueryVo.pageBean.totalPage }">尾页</a></li>
+		</ul>
+    </div>
     <!-- footer -->
     <footer>
         <!-- footer-top -->
@@ -498,8 +268,8 @@
                     <address>
                         <ul>
                             <li>Hebut University</li>
-                            <li>Telephone : secret</li>
-                            <li>Email : <a class="mail">We don't konw either.</a></li>
+                            <li>Telephone : 13820872310</li>
+                            <li>Email : <a class="mail">1414499216@qq.com</a></li>
                         </ul>
                     </address>
                 </div>
@@ -513,15 +283,15 @@
     </footer>
     <!-- //footer -->
 </body>
-<script src="js/zxf_page.js" type="text/javascript"></script>
+<!-- 每一项的点击事件 -->
 <script type="text/javascript">
-  $(".jm-item-image").click(function () {
-	  var urlNew = "property-details.html?id="+$(this).prev().text();//此处拼接内容
+   $(".jm-item-image").click(function () {
+	  var urlNew = "/house/detail?id="+$(this).prev().text();//此处拼接内容
 	  window.location.href = urlNew;
   })
   $(".agile-its-property-title").click(function () {
-	  var urlNew = "property-details.html?id="+$(this).parent().children(":first").text();//此处拼接内容
+	  var urlNew = "/house/detail?id="+$(this).parent().children(":first").text();//此处拼接内容
 	  window.location.href = urlNew;
-  })
+  }) 
 </script>
 </html>

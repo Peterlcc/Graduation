@@ -17,6 +17,7 @@
   	<collection property="logs" ofType="com.peter.bean.Log" select="com.peter.mapper.LogMapper.selectLogsByUserId" column="id"></collection>
   	<collection property="collects" ofType="com.peter.bean.Collect" select="com.peter.mapper.CollectMapper.selectCollectsByUserId" column="id"></collection>
   	<collection property="phones" ofType="com.peter.bean.Phone" select="com.peter.mapper.PhoneMapper.selectPhonesByUserId" column="id"></collection>
+  	<collection property="recommands" ofType="com.peter.bean.Recommand" select="com.peter.mapper.RecommandMapper.selectByUser" column="id"></collection>
   </resultMap>
   <sql id="Base_Column_List">
     id, name, password, sex, age, email, major_id

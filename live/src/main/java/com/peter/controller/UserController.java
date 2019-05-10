@@ -5,9 +5,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.peter.bean.Collect;
 import com.peter.bean.ServiceResult;
 import com.peter.bean.User;
+import com.peter.service.CollectService;
 import com.peter.service.UserService;
 
 @Controller
@@ -16,6 +19,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private CollectService collectService;
 
 	@RequestMapping("/login")
 	public String index() {
@@ -40,7 +46,6 @@ public class UserController {
 		user.setPassword(password);
 
 		ServiceResult<Boolean> result = userService.login(user);
-		System.out.println(result);
 		if (!result.getResult()) {
 			request.setAttribute("errorMsg", result.getMsg());
 			request.setAttribute("result", result.getResult());
@@ -53,5 +58,15 @@ public class UserController {
 			request.setAttribute("result", result.getResult());
 			return "/house/home";
 		}
+	}
+	@RequestMapping("/collect")
+	@ResponseBody
+	public Collect getCollect(Integer userId,Integer houseId) {
+		return collectService.getCollectByUserAndHouse(userId, houseId);
+	}
+	@RequestMapping("/userCollect")
+	@ResponseBody
+	public Collect userCollect(Integer userId,Integer houseId) {
+		return collectService.setCollectByUserAndHouse(userId, houseId);
 	}
 }

@@ -38,8 +38,10 @@ public class LiveApplicationTests {
 		System.out.println(logs.size());
 		System.out.println(logs.get(0).getHouse());*/
 		
-		House house = houseMapper.selectByPrimaryKey(5);
-		System.out.println(house);
+		List<User> users= userMapper.selectByName("Cakr");
+		User user = users.get(0);
+		System.out.println(user);
+		System.out.println(user.getRecommands());
 	}
 
 }

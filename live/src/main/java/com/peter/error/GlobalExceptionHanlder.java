@@ -12,10 +12,8 @@ public class GlobalExceptionHanlder {
 	private String errorPage="error";
 	
 	@ExceptionHandler(Exception.class)
-	@ResponseBody
 	public ModelAndView excepitonHandle(Exception exception)
 	{
-		
 		exception.printStackTrace();
 		ModelAndView modelAndView=new ModelAndView(errorPage);
 		modelAndView.addObject("errormsg", exception.getMessage());

@@ -21,7 +21,10 @@ public class User {
     private List<Log> logs;
     private List<Collect> collects;
     private List<Phone> phones;
+    private List<Recommand> recommands;
 
+    
+    
     public User(Integer id, String name, String password, String sex, Integer age, String email, Integer majorId) {
         this.id = id;
         this.name = name;
@@ -43,6 +46,11 @@ public class User {
         this.age = user.age;
         this.email = user.email;
         this.majorId = user.majorId;
+        
+        this.recommands=user.recommands;
+        this.logs=user.logs;
+        this.collects=user.collects;
+        this.phones=user.phones;
 	}
 
 
@@ -133,6 +141,15 @@ public class User {
     public void setMajorId(Integer majorId) {
         this.majorId = majorId;
     }
+
+    
+	public List<Recommand> getRecommands() {
+		return recommands;
+	}
+
+	public void setRecommands(List<Recommand> recommands) {
+		this.recommands = recommands;
+	}
 
 	@Override
 	public String toString() {

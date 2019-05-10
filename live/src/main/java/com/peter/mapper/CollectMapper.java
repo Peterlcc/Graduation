@@ -2,6 +2,8 @@ package com.peter.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.peter.bean.Collect;
 
 public interface CollectMapper {
@@ -12,6 +14,8 @@ public interface CollectMapper {
     int insertSelective(Collect record);
 
     Collect selectByPrimaryKey(Integer id);
+    
+    Collect selectByUserAndHouse(@Param("userId")Integer userId,@Param("houseId")Integer houseId);
 
     List<Collect> selectCollectsByUserId(Integer userId);
     

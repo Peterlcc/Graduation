@@ -51,12 +51,56 @@
     dealer_phone, checkin_type, rent_time, look_type, floor, elevator, car_pos, water, 
     electricity, gas, facility, nearby, city, area_city, street, page
   </sql>
+  
+  <sql id="multiQuery">
+	  <if test="houseQueryVo.house!=null">
+	  	<if test="houseQueryVo.house.id!=null">
+  		and id=#{houseQueryVo.house.id}
+	  	</if>
+	  	<if test="houseQueryVo.house.areaCity!=null and houseQueryVo.house.areaCity != ''">
+	  		and area_city=#{houseQueryVo.house.areaCity}
+	  	</if>
+	  	<if test="houseQueryVo.house.street!=null and houseQueryVo.house.street != ''">
+	  		and street=#{houseQueryVo.house.street}
+	  	</if>
+	  </if>
+  	<if test="houseQueryVo.maxPrice!=null">
+  		and price <![CDATA[<=]]> #{houseQueryVo.maxPrice}
+  	</if>
+  	<if test="houseQueryVo.minPrice!=null">
+  		and price<![CDATA[>=]]>#{houseQueryVo.minPrice}
+  	</if>
+  </sql>
+  <sql id="limitsql">
+  	limit #{start},#{size}
+  </sql>
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="imgHouseResultMap">
     select 
     <include refid="Base_Column_List" />
     from house
     where id = #{id,jdbcType=INTEGER}
   </select>
+  
+  <select id="selectHouseList" resultMap="imgHouseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from house
+    <where>
+    	<include refid="multiQuery"></include>
+    </where>
+    <include refid="limitsql"></include>
+  </select>
+  
+  <select id="selectTotalRecord" resultType="int">
+    select 
+    count(1)
+    from house
+    <where>
+    	<include refid="multiQuery"></include>
+    </where>
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from house
     where id = #{id,jdbcType=INTEGER}

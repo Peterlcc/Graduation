@@ -9,6 +9,7 @@
 */
 
 (function(global, $) {
+
     'use strict';
 
     //Make sure jQuery exists
@@ -343,7 +344,7 @@
         * @private
         */
         _getFiltrItems: function() {
-            var self= this,
+            var self       = this,
             filtrItems = $(self.find('.filtr-item')),
             itemsArray = [];
 

@@ -33,6 +33,13 @@
     from phone
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
+  <select id="selectByUserAndHouse" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from phone
+    where user_id = #{userId,jdbcType=INTEGER}
+    and house_id = #{houseId,jdbcType=INTEGER}
+  </select>
   <select id="selectPhoneNumByHouseId" parameterType="java.lang.Integer" resultType="int">
     select 
     count(1)

@@ -21,6 +21,9 @@ public class CollectServiceImpl implements CollectService {
 	}
 	@Override
 	public Collect setCollectByUserAndHouse(Integer userId, Integer houseId) {
+		if (userId==null||houseId==null) {
+			throw new RuntimeException("用户id或者房屋id不能为空");
+		}
 		Collect collect = collectMapper.selectByUserAndHouse(userId, houseId);
 		if (collect==null) {
 			collect=new Collect();

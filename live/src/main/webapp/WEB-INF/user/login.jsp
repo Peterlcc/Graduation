@@ -54,21 +54,6 @@
                 //$('.filtr-container').filterizr();
             });
         </script>
-        <!-- here stars scrolling icon -->
-        <script type="text/javascript">
-            $(document).ready(function() {
-                /*
-                 var defaults = {
-                 containerID: 'toTop', // fading element id
-                 containerHoverID: 'toTopHover', // fading element hover id
-                 scrollSpeed: 1200,
-                 easingType: 'linear'
-                 };
-                 */
-//					$().UItoTop({ easingType: 'easeOutQuart' });
-
-            });
-        </script>
         <!-- start-smoth-scrolling -->
         <script type="text/javascript" src="../../resource/user/js/move-top.js"></script>
         <script type="text/javascript" src="../../resource/user/js/easing.js"></script>
@@ -102,10 +87,10 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                           <ul class="nav navbar-nav">
-                            <li ><a href="properties.html">首页</a></li>
-                      
-                            <li ><a href="register.html">注册</a></li>
-                            <li class="active"><a href="login.html">登录</a></li>
+                            <li><a href="/house/ilive">Home</a></li>
+							<li><a href="/house/home">租房</a></li>
+                            <li ><a href="/user/register">注册</a></li>
+                            <li class="active"><a href="">登录</a></li>
 
                         </ul>
                     </div>
@@ -126,6 +111,9 @@
                 <div class="container">
                     <div class="row">
                         <div class="titlelogin" style="text-align: center;color: white">
+                            <c:if test="${not empty errorMsg }">
+                            	<font color="red">${errorMsg }</font>
+                            </c:if>
                             <h2> 登录</h2>
                         </div>
                     </div>
@@ -143,13 +131,10 @@
 			                        	<input type="password" id="password"  name="password" placeholder="密码" class="form-password form-control" >
 			                        </div>
 			                        <center><input type="submit" value="登录" class="btn" style="text-align: center;line-height: 2px; background-color: #4aaf51;border: 1px solid transparent;width:100%;color: white;height: 35px"></center>
-			                        
-			                        <!-- <button id="submit" type="button"  class="btn" style="text-align: center;line-height: 2px;">登录</button> -->
-                   		        
                    		        	<div class="newregister" style="padding: 15px  0 0 0px">
                    		       			<h5><a hred="<c:url value='/user/forgotPassword'></c:url>">忘记密码？</a >
                    		       			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                   		       			<a style="text-align:right; !important" href="register.html">没有注册账号？请注册</a></h5>
+                   		       			<a style="text-align:right; !important" href="/user/register">没有注册账号？请注册</a></h5>
                    		        	</div>
 			                    </form>
 		                    </div>
@@ -159,7 +144,7 @@
             </div>
         </div>
 
-    <!-- footer -->
+    	<!-- footer -->
     <footer>
         <!-- footer-top -->
         <div class="footer-top">
@@ -170,10 +155,10 @@
                 <div class="col-md-4 footer-top-mid">
                     <h3>Our Program</h3>
                     <ul>
-                        <li><a href="properties.html"><i class="fa fa-long-arrow-right" aria-hidden="true"></i>主页</a></li>
+                        <li><a href="/house/ilive"><i class="fa fa-long-arrow-right" aria-hidden="true"></i>主页</a></li>
                       
-                        <li><a href="register.html"><i class="fa fa-long-arrow-right" aria-hidden="true"></i>注册</a></li>
-                        <li><a href="login.html"><i class="fa fa-long-arrow-right" aria-hidden="true"></i>登录</a></li>
+                        <li><a href="/user/register"><i class="fa fa-long-arrow-right" aria-hidden="true"></i>注册</a></li>
+                        <li><a href="/user/login"><i class="fa fa-long-arrow-right" aria-hidden="true"></i>登录</a></li>
 
                     </ul>
                 </div>
@@ -192,7 +177,7 @@
         </div>
         <!-- //footer-top -->
         <div class="w3layouts-copyright">
-            <p class="footer">Copyright &copy; 2018.iLive All rights reserved. </p>
+            <p class="footer">Copyright &copy; 2019.iLive All rights reserved. </p>
         </div>
     </footer>
     

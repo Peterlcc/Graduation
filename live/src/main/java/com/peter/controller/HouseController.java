@@ -38,6 +38,12 @@ public class HouseController {
 		System.out.println(area.getStreets().size());
 		return area;
 	}
+	
+	@RequestMapping("/ilive")
+	public String ilive()
+	{
+		return "/WEB-INF/user/ilive.jsp";
+	}
 
 	@RequestMapping("/home")
 	public String home(HttpServletRequest request) {

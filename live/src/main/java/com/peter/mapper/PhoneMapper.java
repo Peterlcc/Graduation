@@ -19,5 +19,7 @@ public interface PhoneMapper {
     int updateByPrimaryKey(Phone record);
     
     int selectPhoneNumByHouseId(Integer houseId);
+
+	Phone selectByUserAndHouse(Integer userId, Integer houseId);
     
 }

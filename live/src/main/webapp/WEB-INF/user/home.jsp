@@ -78,10 +78,16 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				  <ul class="nav navbar-nav">
-					<li class="active"><a href="/house/home" >主页</a></li>
-					
-					<li><a id="getusername">${user.name}</a></li>
-					<li><a >欢迎登录</a></li>
+					<li id="userId" style="display: none" value="${user.id}">${user.id}</li>
+					<li ><a href="/house/ilive">Home</a></li>
+					<li class="active"><a href="/house/home">租房</a></li>
+					<li class="dropdown">
+					  <a href="#" class="dropdown-toggle" data-toggle="dropdown">${user.name} <b class="caret"></b></a>
+					  <ul class="dropdown-menu">
+						<li><a href="/user/detail">个人信息</a></li>
+						<li><a href="/user/logout">退出</a></li>
+					  </ul>
+					</li>
 				  </ul>
 				</div>
 				<!-- /.navbar-collapse -->
@@ -175,7 +181,7 @@
 				<c:forEach items="${houseQueryVo.pageBean.beanList}" var="bean">
 					<div class="col-md-4 col-ms-6 jm-item first filtr-item"  style="opacity: 1; transform: scale(1) translate3d(<%=x[scaleIndex] %>px, <%=y[scaleIndex] %>px, <%=z[scaleIndex] %>px); backface-visibility: hidden; perspective: 1000px; transform-style: preserve-3d; position: absolute; transition: all 0.5s ease-out 0ms;">
 						<div class="jm-item-wrapper" >
-							<span class="jm-item-id" style="display: none;">${bean.id}</span>
+							<span id="hosueId" class="jm-item-id" style="display: none;">${bean.id}</span>
 							<div class="jm-item-image" >
 								<img class="imgsrc" src="${bean.imgUrls[0] }" alt="${bean.title }" />
 								<span class="jm-item-overlay"> </span>
@@ -283,14 +289,22 @@
     </footer>
     <!-- //footer -->
 </body>
+
+<!-- log的收集 -->
+<script type="text/javascript" src="../../resource/user/js/house-log.js"></script>
+
 <!-- 每一项的点击事件 -->
 <script type="text/javascript">
    $(".jm-item-image").click(function () {
-	  var urlNew = "/house/detail?id="+$(this).prev().text();//此处拼接内容
+	  var houseId=$(this).prev().text();
+	  houseLog(houseId);
+	  var urlNew = "/house/detail?id="+houseId;//此处拼接内容
 	  window.location.href = urlNew;
   })
   $(".agile-its-property-title").click(function () {
-	  var urlNew = "/house/detail?id="+$(this).parent().children(":first").text();//此处拼接内容
+	  var houseId=$(this).parent().children(":first").text();
+	  houseLog(houseId);
+	  var urlNew = "/house/detail?id="+houseId;//此处拼接内容
 	  window.location.href = urlNew;
   }) 
 </script>

@@ -8,9 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.peter.bean.Collect;
+import com.peter.bean.Log;
+import com.peter.bean.Phone;
 import com.peter.bean.ServiceResult;
 import com.peter.bean.User;
 import com.peter.service.CollectService;
+import com.peter.service.LogService;
+import com.peter.service.PhoneService;
 import com.peter.service.UserService;
 
 @Controller
@@ -22,11 +26,31 @@ public class UserController {
 	
 	@Autowired
 	private CollectService collectService;
+	
+	@Autowired
+	private LogService logService;
 
+	@Autowired
+	private PhoneService phoneService;
+	
+	
+	@RequestMapping("register")
+	public String register(HttpServletRequest request)
+	{
+		
+		return "/WEB-INF/user/register.jsp";
+	}
+	
 	@RequestMapping("/login")
 	public String index() {
-		System.out.println("user login");
 		return "/WEB-INF/user/login.jsp";
+	}
+	
+	@RequestMapping("logout")
+	public String logout(HttpServletRequest request)
+	{
+		request.getSession().setAttribute("user", null);
+		return "/house/ilive";
 	}
 
 	@RequestMapping("/getin")
@@ -59,6 +83,24 @@ public class UserController {
 			return "/house/home";
 		}
 	}
+	
+	
+	@RequestMapping("/add")
+	@ResponseBody
+	public ServiceResult<Boolean> userAdd(HttpServletRequest request)
+	{
+		String username = request.getParameter("name");
+		String password=request.getParameter("password");
+		String sex = request.getParameter("sex");
+		String majorId = request.getParameter("major_id");
+		String age = request.getParameter("age");
+		String email = request.getParameter("eamil");
+		User user = new User(null, username, password, sex, Integer.parseInt(age), email, Integer.parseInt(majorId));
+		System.out.println(user);
+		ServiceResult<Boolean> result = userService.add(user);
+		return result;
+	}
+	
 	@RequestMapping("/collect")
 	@ResponseBody
 	public Collect getCollect(Integer userId,Integer houseId) {
@@ -68,5 +110,17 @@ public class UserController {
 	@ResponseBody
 	public Collect userCollect(Integer userId,Integer houseId) {
 		return collectService.setCollectByUserAndHouse(userId, houseId);
+	}
+	
+	@RequestMapping("/log")
+	@ResponseBody
+	public Log collectLog(Integer userId,Integer houseId) {
+		return logService.getLogByUserAndHouse(userId, houseId);
+	}
+	
+	@RequestMapping("/phone")
+	@ResponseBody
+	public Phone collectPhone(Integer userId,Integer houseId) {
+		return phoneService.getPhoneByUserAndHouse(userId, houseId);
 	}
 }

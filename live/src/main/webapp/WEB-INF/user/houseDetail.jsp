@@ -15,6 +15,9 @@ import="java.util.List"
     <link href="../../resource/user/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" /><!-- fontawesome -->
     <link href="../../resource/user/css/style.css" rel="stylesheet" type="text/css" media="all" /><!-- stylesheet -->
     <link href="../../resource/user/css/detail.css" rel="stylesheet" type="text/css"/><!-- stylesheet -->
+    <link href="../../resource/like/css/style.css" rel="stylesheet" type="text/css" media="all" /><!-- stylesheet -->
+    <link href="../../resource/like/css/default.css" rel="stylesheet" type="text/css"/><!-- stylesheet -->
+    <link href="../../resource/like/css/normalize.css" rel="stylesheet" type="text/css"/><!-- stylesheet -->
     <!-- meta tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -40,6 +43,9 @@ import="java.util.List"
     <script type="text/javascript" src="../../resource/user/js/move-top.js"></script>
     <script type="text/javascript" src="../../resource/user/js/easing.js"></script>
     <script type="text/javascript" src="../../resource/user/js/house-collect.js"></script>
+    
+    <script src="../../resource/user/js/house-log.js"></script>
+    
     <script type="text/javascript">
 
         jQuery(document).ready(function($) {
@@ -54,7 +60,11 @@ import="java.util.List"
     <!-- //here ends scrolling icon -->
     <script type="text/javascript">
     function Tel(){
-    	document.getElementById("dealer-phone").style.display="inline";
+    	if(document.getElementById("dealer-phone").style.display!="inline"){
+	    	var houseId=$("#houseid").text();
+	    	housePhone(houseId);
+	    	document.getElementById("dealer-phone").style.display="inline";
+    	}
     }
     </script>
 	<script type="text/javascript">
@@ -82,8 +92,17 @@ import="java.util.List"
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				  <ul class="nav navbar-nav">
 				  	<li id="userId" style="display: none" value="${user.id}">${user.id}</li>
-				  	<li class="active"><a href="/house/home" >主页</a></li>
-					<li><a id="getusername">${user.name}</a></li>
+				  	<%-- <li class="active"><a href="/house/home" >主页</a></li>
+					<li><a id="getusername">${user.name}</a></li> --%>
+					<li ><a href="/house/ilive">Home</a></li>
+					<li class="active"><a href="/house/home">租房</a></li>
+					<li class="dropdown">
+					  <a href="#" class="dropdown-toggle" data-toggle="dropdown">${user.name} <b class="caret"></b></a>
+					  <ul class="dropdown-menu">
+						<li><a href="/user/detail">个人信息</a></li>
+						<li><a href="/user/logout">退出</a></li>
+					  </ul>
+					</li>
 				  </ul>
 				</div>
 				<!-- /.navbar-collapse -->
@@ -268,13 +287,13 @@ import="java.util.List"
     <div class="footer-top">
         <div class="container">
             <div class="col-md-4 footer-top-left">
-                <h3><a href="index.html">iLive</a></h3>
+                <h3><a href="/house/ilive">iLive</a></h3>
             </div>
             <div class="col-md-4 footer-top-mid">
                 <h3>Our Program</h3>
                 <ul>
                     <li><a href="/house/home"><i class="fa fa-long-arrow-right" aria-hidden="true"></i>主页</a></li>
-                    <li><a href="about.html"><i class="fa fa-long-arrow-right" aria-hidden="true"></i>关于我们</a></li>
+                    <li><a href="/house/about"><i class="fa fa-long-arrow-right" aria-hidden="true"></i>关于我们</a></li>
                     <li><a href="/user/login"><i class="fa fa-long-arrow-right" aria-hidden="true"></i>登录</a></li>
                     <li><a href="/user/register"><i class="fa fa-long-arrow-right" aria-hidden="true"></i>注册</a></li>
                 </ul>
@@ -301,12 +320,17 @@ import="java.util.List"
 <script>
 
 $(".img-responsive1").click(function () {
-	  var urlNew = "/house/detail?id="+$(this).parent().parent().prev().text();//此处拼接内容
-	  window.location.href = urlNew;
+	var houseId=$(this).parent().parent().prev().text();//此处拼接内容
+	houseLog(houseId);
+	var urlNew = "/house/detail?id="+houseId;
+	
+	window.location.href = urlNew;
 })
 $(".recom").click(function () {
-	  var urlNew = "/house/detail?id="+$(this).parent().children(":first").text();//此处拼接内容
-	  window.location.href = urlNew;
+	var houseId=$(this).parent().children(":first").text();//此处拼接内容
+	houseLog(houseId);
+	var urlNew = "/house/detail?id="+houseId;
+	window.location.href = urlNew;
 })
 </script>
 </body>

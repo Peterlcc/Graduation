@@ -1,6 +1,7 @@
 package com.peter.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.peter.bean.House;
 import com.peter.bean.HouseQueryVo;
 import com.peter.bean.PageBean;
+import com.peter.mapper.HouseAnalyzeMapper;
 import com.peter.mapper.HouseMapper;
 import com.peter.service.HouseService;
 
@@ -17,6 +19,9 @@ public class HouseServiceImpl implements HouseService {
 
 	@Autowired
 	private HouseMapper houseMapper;
+	
+	@Autowired
+	private HouseAnalyzeMapper houseAnalyzeMapper;
 
 	@Override
 	public House findById(int id) {
@@ -41,5 +46,11 @@ public class HouseServiceImpl implements HouseService {
 		}
 		System.out.println("service queryvo.beanlist:"+houseQueryVo.getPageBean().getBeanList());
 
+	}
+
+	@Override
+	public List<Map<String, String>> analyzeByProperty(String property) {
+		
+		return houseAnalyzeMapper.selectByProperty(property);
 	}
 }

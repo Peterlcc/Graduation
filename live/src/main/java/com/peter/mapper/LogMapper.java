@@ -12,7 +12,9 @@ public interface LogMapper {
     int insertSelective(Log record);
 
     Log selectByPrimaryKey(Integer id);
-
+    
+    
+    Log selectByUserAndHouse(Integer userId,Integer houseId);
     List<Log> selectLogsByUserId(Integer userId);
     
     int updateByPrimaryKeySelective(Log record);

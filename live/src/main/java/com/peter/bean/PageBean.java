@@ -66,7 +66,7 @@ public class PageBean<T> {
 
 	public int getTotalPage() {
 		int totalPage=totalRecord/pageSize;
-		return totalPage%pageSize==0?totalPage:totalPage+1;
+		return totalRecord%pageSize==0?totalPage:totalPage+1;
 	}
 
 

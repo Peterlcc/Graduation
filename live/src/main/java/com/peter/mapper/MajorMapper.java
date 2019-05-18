@@ -1,5 +1,7 @@
 package com.peter.mapper;
 
+import java.util.List;
+
 import com.peter.bean.Major;
 
 public interface MajorMapper {
@@ -10,6 +12,7 @@ public interface MajorMapper {
     int insertSelective(Major record);
 
     Major selectByPrimaryKey(Integer id);
+    List<Major> selectAll();
 
     int updateByPrimaryKeySelective(Major record);
 

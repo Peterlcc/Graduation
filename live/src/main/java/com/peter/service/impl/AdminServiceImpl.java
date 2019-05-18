@@ -40,4 +40,12 @@ public class AdminServiceImpl implements AdminService{
 		return result;
 	}
 
+	@Override
+	public void modify(Admin admin) {
+		if (admin.getId()==null) {
+			throw new RuntimeException("修改的用户id不能为空！");
+		}
+		adminMapper.updateByPrimaryKeySelective(admin);
+	}
+
 }

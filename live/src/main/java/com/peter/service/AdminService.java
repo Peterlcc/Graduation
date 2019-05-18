@@ -7,4 +7,5 @@ public interface AdminService {
 	Admin getAdminByName(String name);
 	Admin getAdminById(Integer id);
 	ServiceResult<Admin> login(Admin admin);
+	void modify(Admin admin);
 }

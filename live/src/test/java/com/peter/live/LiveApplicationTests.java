@@ -13,6 +13,7 @@ import com.peter.bean.Log;
 import com.peter.bean.User;
 import com.peter.mapper.HouseMapper;
 import com.peter.mapper.LogMapper;
+import com.peter.mapper.MajorMapper;
 import com.peter.mapper.UserMapper;
 
 @RunWith(SpringRunner.class)
@@ -28,6 +29,9 @@ public class LiveApplicationTests {
 	@Autowired
 	private HouseMapper houseMapper;
 	
+	@Autowired
+	private MajorMapper majorMapper;
+	
 	@Test
 	public void contextLoads() {
 		/*Log log = logMapper.selectByPrimaryKey(1);
@@ -36,12 +40,17 @@ public class LiveApplicationTests {
 		
 		List<Log> logs = logMapper.selectLogsByUserId(1);
 		System.out.println(logs.size());
-		System.out.println(logs.get(0).getHouse());*/
+		System.out.println(logs.get(0).getHouse());
 		
 		List<User> users= userMapper.selectByName("Cakr");
 		User user = users.get(0);
 		System.out.println(user);
 		System.out.println(user.getRecommands());
+		
+		System.out.println(majorMapper.selectAll());*/
+		
+		List<House> houses = houseMapper.selectLogHouses(1, 0, 5);
+		System.out.println(houses);
 	}
 
 }

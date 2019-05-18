@@ -51,7 +51,12 @@
     dealer_phone, checkin_type, rent_time, look_type, floor, elevator, car_pos, water, 
     electricity, gas, facility, nearby, city, area_city, street, page
   </sql>
-  
+  <sql id="House_Base_Column_List">
+    house.id, house.url, house.title, house.house_code, house.release_time, house.business_license, house.price, house.pay_type, house.tags, 
+    house.rent_type, house.room_type, house.area, direction, house.dealer_name, house.dealer_company, house.dealer_type, 
+    house.dealer_phone, house.checkin_type, house.rent_time, house.look_type, house.floor, house.elevator, house.car_pos, house.water, 
+    house.electricity, house.gas, facility, house.nearby, house.city, house.area_city, house.street, page
+  </sql>
   <sql id="multiQuery">
 	  <if test="houseQueryVo.house!=null">
 	  	<if test="houseQueryVo.house.id!=null">
@@ -91,7 +96,6 @@
     </where>
     <include refid="limitsql"></include>
   </select>
-  
   <select id="selectTotalRecord" resultType="int">
     select 
     count(1)
@@ -99,6 +103,52 @@
     <where>
     	<include refid="multiQuery"></include>
     </where>
+  </select>
+  
+  <select id="selectLogHouses" resultMap="BaseResultMap">
+    select 
+    <include refid="House_Base_Column_List" />
+    from house,log
+    where log.house_id=house.id and log.user_id=#{userId,jdbcType=INTEGER}
+    <include refid="limitsql"></include>
+  </select>
+  <select id="selectLogHousesTotalRecord" parameterType="int" resultType="int">
+    select 
+    count(1)
+    from house,log
+    where log.house_id=house.id and log.user_id=#{userId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectCollectHouses" resultMap="BaseResultMap">
+    select 
+    <include refid="House_Base_Column_List" />
+    from house,collect
+    where collect.house_id=house.id 
+    and collect.user_id=#{userId,jdbcType=INTEGER}
+    <include refid="limitsql"></include>
+  </select>
+  <select id="selectCollectHousesTotalRecord" parameterType="int" resultType="int">
+    select 
+    count(1)
+    from house,collect
+    where collect.house_id=house.id 
+    and collect.user_id=#{userId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectPhoneHouses" resultMap="BaseResultMap">
+    select 
+    <include refid="House_Base_Column_List" />
+    from house,phone
+    where phone.house_id=house.id 
+    and phone.user_id=#{userId,jdbcType=INTEGER}
+    <include refid="limitsql"></include>
+  </select>
+  <select id="selectPhoneHousesTotalRecord" parameterType="int" resultType="int">
+    select 
+    count(1)
+    from house,phone
+    where phone.house_id=house.id 
+    and phone.user_id=#{userId,jdbcType=INTEGER}
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">

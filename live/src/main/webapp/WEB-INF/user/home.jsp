@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     isELIgnored="false" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -183,12 +184,20 @@
 						<div class="jm-item-wrapper" >
 							<span id="hosueId" class="jm-item-id" style="display: none;">${bean.id}</span>
 							<div class="jm-item-image" >
-								<img class="imgsrc" src="${bean.imgUrls[0] }" alt="${bean.title }" />
+								<c:choose>
+									<c:when test="${fn:length(bean.title) gt 15 }">
+										<c:set var="houseTitle" value="${fn:substring(bean.title,0,12)}..."></c:set>
+									</c:when>
+									<c:otherwise>
+										<c:set var="houseTitle" value="${bean.title}"></c:set>
+									</c:otherwise>
+								</c:choose>
+								<img class="imgsrc" src="${bean.imgUrls[0] }" alt="${houseTitle}" />
 								<span class="jm-item-overlay"> </span>
 								<div class="jm-item-button"><a>详细内容</a></div>
 							</div>
 							<div class="jm-item-title">￥${bean.price }</div>
-							<a class="agile-its-property-title" >${bean.title }</a>
+							<a class="agile-its-property-title" >${houseTitle}</a>
 						</div>
 					</div>
 					<%scaleIndex++; %> 
@@ -204,6 +213,7 @@
 
 	</div>
 <!-- //main-content -->
+	<!-- 分页开始 -->
     <div class="center">
     	<ul class="pagination">
     	  <li><h5>第${houseQueryVo.pageBean.currentPage }页/共${houseQueryVo.pageBean.totalPage }页</h5></li>
@@ -251,6 +261,8 @@
 		<li><a href="${houseQueryVo.pageBean.url }&pc=${houseQueryVo.pageBean.totalPage }">尾页</a></li>
 		</ul>
     </div>
+    <!-- 分页结束 -->
+    
     <!-- footer -->
     <footer>
         <!-- footer-top -->

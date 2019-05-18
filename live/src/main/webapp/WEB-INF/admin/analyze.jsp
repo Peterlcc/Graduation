@@ -46,8 +46,7 @@
 	src="../../resource/analyze/js/echarts-gl.min.js"></script>
 <script type="text/javascript"
 	src="../../resource/analyze/js/ecStat.min.js"></script>
-<script type="text/javascript"
-	src="../../resource/analyze/js/dataTool.min.js"></script>
+
 <script type="text/javascript" src="../../resource/analyze/js/china.js"></script>
 <script type="text/javascript" src="../../resource/analyze/js/world.js"></script>
 <script type="text/javascript"
@@ -189,7 +188,8 @@
 					<!-- //footer -->
 				</div>
 			</div>
-			<!--//content-inner-->
+		</div>
+		<!--//content-inner-->
 			<!--/sidebar-menu-->
 			<div class="sidebar-menu">
 				<header class="logo">
@@ -204,10 +204,10 @@
 				<div class="down">
 					<a href="index.html"><img
 						src="../../resource/analyze/images/admin.jpg"></a> <a
-						href="index.html"><span class=" name-caret">管理员：${sessionScope.admin.name }</span></a>
+						class="disable" href="javascript:void(0)"><span class=" name-caret">管理员：${sessionScope.admin.name }</span></a>
 					<p>管理员</p>
 					<ul>
-						<li><a class="tooltips" href="index.html"><span>修改密码</span><i
+						<li><a class="tooltips" href="/admin/edit"><span>修改密码</span><i
 								class="lnr lnr-cog"></i></a></li>
 						<li><a class="tooltips" href="/admin/logout"><span>退出登录</span><i
 								class="lnr lnr-power-switch"></i></a></li>
@@ -217,9 +217,13 @@
 				<div class="menu">
 					<ul id="menu">
 						<li><a href="/admin/analyze#house-chart"><i
-								class="fa fa-table"></i> <span>房屋</span></a></li>
+								class="fa fa-table"></i> <span>房屋分析</span></a></li>
 						<li><a href="/admin/analyze#user-chart"><i
-								class="fa fa-table"></i> <span>用户</span></a></li>
+								class="fa fa-table"></i> <span>用户分析</span></a></li>
+						<li><a href="/admin/users"><i
+							class="fa fa-file-text-o"></i> <span>用户明细</span></a></li>
+					<li><a href="/admin/houses"><i
+							class="fa fa-file-text-o"></i> <span>房屋明细</span></a></li>
 					</ul>
 				</div>
 			</div>

@@ -56,7 +56,6 @@ public class HouseController {
 			return "/user/login";
 		}
 
-		// TODO 返回home页需要的房屋信息列表
 		// 获取当前页，默认1
 		int pc = 1;
 		String pcString = request.getParameter("pc");
@@ -72,7 +71,6 @@ public class HouseController {
 		}
 		//
 		String url = URLUtil.getUrl(request);
-		System.out.println("url:" + url);
 		HouseQueryVo houseQueryVo = null;
 		houseQueryVo = new HouseQueryVo();
 		if (request.getParameterMap().size() <= 1) {

@@ -38,13 +38,6 @@ public class HouseServiceImpl implements HouseService {
 		map.put("size", pageBean.getPageSize());
 		pageBean.setTotalRecord(houseMapper.selectTotalRecord(map));
 		pageBean.setBeanList(houseMapper.selectHouseList(map));
-		for(House house:pageBean.getBeanList())
-		{
-			if (house.getTitle().length()>15) {
-				house.setTitle(house.getTitle().substring(0, 12)+"...");
-			}
-		}
-		System.out.println("service queryvo.beanlist:"+houseQueryVo.getPageBean().getBeanList());
 
 	}
 
@@ -52,5 +45,38 @@ public class HouseServiceImpl implements HouseService {
 	public List<Map<String, String>> analyzeByProperty(String property) {
 		
 		return houseAnalyzeMapper.selectByProperty(property);
+	}
+
+	@Override
+	public PageBean<House> getLogHouses(Integer userId,int pc,int ps,String url) {
+		PageBean<House> pageBean=new PageBean<>();
+		pageBean.setTotalRecord(houseMapper.selectLogHousesTotalRecord(userId));
+		pageBean.setCurrentPage(pc);
+		pageBean.setPageSize(ps);
+		pageBean.setBeanList(houseMapper.selectLogHouses(userId, (pageBean.getCurrentPage()-1)*pageBean.getPageSize(), pageBean.getPageSize()));
+		pageBean.setUrl(url);
+		return pageBean;
+	}
+
+	@Override
+	public PageBean<House> getCollectHouses(Integer userId, int pc, int ps, String url) {
+		PageBean<House> pageBean=new PageBean<>();
+		pageBean.setTotalRecord(houseMapper.selectCollectHousesTotalRecord(userId));
+		pageBean.setCurrentPage(pc);
+		pageBean.setPageSize(ps);
+		pageBean.setBeanList(houseMapper.selectCollectHouses(userId, (pageBean.getCurrentPage()-1)*pageBean.getPageSize(), pageBean.getPageSize()));
+		pageBean.setUrl(url);
+		return pageBean;
+	}
+
+	@Override
+	public PageBean<House> getPhoneHouses(Integer userId, int pc, int ps, String url) {
+		PageBean<House> pageBean=new PageBean<>();
+		pageBean.setTotalRecord(houseMapper.selectPhoneHousesTotalRecord(userId));
+		pageBean.setCurrentPage(pc);
+		pageBean.setPageSize(ps);
+		pageBean.setBeanList(houseMapper.selectPhoneHouses(userId, (pageBean.getCurrentPage()-1)*pageBean.getPageSize(), pageBean.getPageSize()));
+		pageBean.setUrl(url);
+		return pageBean;
 	}
 }

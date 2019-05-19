@@ -3,7 +3,7 @@
 <mapper namespace="com.peter.mapper.UserAnalyzeMapper">
 	<select id="selectByProperty" parameterType="java.lang.String" resultType="java.util.TreeMap">
 		select
-		${property} as property,count(1) as num
+		${property} as property,round(${aggregate}(${aggregation}),2) as num
 		from users,majors
 		where users.major_id=majors.id
 		group by ${property}

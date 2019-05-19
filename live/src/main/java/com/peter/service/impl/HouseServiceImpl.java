@@ -10,8 +10,11 @@ import org.springframework.stereotype.Service;
 import com.peter.bean.House;
 import com.peter.bean.HouseQueryVo;
 import com.peter.bean.PageBean;
+import com.peter.bean.Recommand;
+import com.peter.bean.User;
 import com.peter.mapper.HouseAnalyzeMapper;
 import com.peter.mapper.HouseMapper;
+import com.peter.mapper.RecommandMapper;
 import com.peter.service.HouseService;
 
 @Service
@@ -22,10 +25,19 @@ public class HouseServiceImpl implements HouseService {
 	
 	@Autowired
 	private HouseAnalyzeMapper houseAnalyzeMapper;
+	
+	@Autowired
+	private RecommandMapper recommandMapper;
 
 	@Override
-	public House findById(int id) {
-		return houseMapper.selectByPrimaryKey(id);
+	public House findById(int id,User user) {
+		House house = houseMapper.selectByPrimaryKey(id);
+		List<Recommand> recommands = recommandMapper.selectByUser(user.getId(), house.getAreaCity(), house.getStreet());
+		user.setRecommands(recommands);
+		if (user.getRecommands()==null||user.getRecommands().size()<4) {
+			user.setRecommands(recommandMapper.selectRandomly());
+		}
+		return house;
 	}
 
 	@Override
@@ -42,9 +54,9 @@ public class HouseServiceImpl implements HouseService {
 	}
 
 	@Override
-	public List<Map<String, String>> analyzeByProperty(String property) {
+	public List<Map<String, String>> analyzeByProperty(String property,String aggregate,String aggregation) {
 		
-		return houseAnalyzeMapper.selectByProperty(property);
+		return houseAnalyzeMapper.selectByProperty(property,aggregate,aggregation);
 	}
 
 	@Override
@@ -76,6 +88,17 @@ public class HouseServiceImpl implements HouseService {
 		pageBean.setCurrentPage(pc);
 		pageBean.setPageSize(ps);
 		pageBean.setBeanList(houseMapper.selectPhoneHouses(userId, (pageBean.getCurrentPage()-1)*pageBean.getPageSize(), pageBean.getPageSize()));
+		pageBean.setUrl(url);
+		return pageBean;
+	}
+
+	@Override
+	public PageBean<House> getAllHouses(int pc, int ps, String url) {
+		PageBean<House> pageBean=new PageBean<>();
+		pageBean.setTotalRecord(houseMapper.selectAllTotalRecord());
+		pageBean.setCurrentPage(pc);
+		pageBean.setPageSize(ps);
+		pageBean.setBeanList(houseMapper.selectAll((pageBean.getCurrentPage()-1)*pageBean.getPageSize(), pageBean.getPageSize()));
 		pageBean.setUrl(url);
 		return pageBean;
 	}

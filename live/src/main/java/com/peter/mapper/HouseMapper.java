@@ -43,4 +43,10 @@ public interface HouseMapper {
 	int selectPhoneHousesTotalRecord(@Param("userId") Integer userId);
 	// 按用户id查询phone记录
 	List<House> selectPhoneHouses(@Param("userId") Integer userId, @Param("start") int start, @Param("size") int size);
+
+	//查询所有房屋记录数
+	int selectAllTotalRecord();
+	//查询所有房屋
+	List<House> selectAll(@Param("start") int start, @Param("size") int size);
+	
 }

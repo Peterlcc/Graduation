@@ -2,6 +2,8 @@ package com.peter.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.peter.bean.Recommand;
 
 public interface RecommandMapper {
@@ -12,7 +14,9 @@ public interface RecommandMapper {
     int insertSelective(Recommand record);
 
     Recommand selectByPrimaryKey(Integer id);
-    List<Recommand> selectByUser(Integer userId);
+    List<Recommand> selectByUser(@Param("userId")Integer userId,
+    		@Param("area")String area,@Param("street")String street);
+    List<Recommand> selectRandomly();
 
     int updateByPrimaryKeySelective(Recommand record);
 

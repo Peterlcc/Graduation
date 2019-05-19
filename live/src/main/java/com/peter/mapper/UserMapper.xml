@@ -17,10 +17,12 @@
   	<collection property="logs" ofType="com.peter.bean.Log" select="com.peter.mapper.LogMapper.selectLogsByUserId" column="id"></collection>
   	<collection property="collects" ofType="com.peter.bean.Collect" select="com.peter.mapper.CollectMapper.selectCollectsByUserId" column="id"></collection>
   	<collection property="phones" ofType="com.peter.bean.Phone" select="com.peter.mapper.PhoneMapper.selectPhonesByUserId" column="id"></collection>
-  	<collection property="recommands" ofType="com.peter.bean.Recommand" select="com.peter.mapper.RecommandMapper.selectByUser" column="id"></collection>
   </resultMap>
   <sql id="Base_Column_List">
     id, name, password, sex, age, email, major_id
+  </sql>
+  <sql id="limitsql">
+  	limit #{start},#{size}
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="UserResultMap">
     select 
@@ -34,6 +36,17 @@
     from users
     where name = #{name,jdbcType=VARCHAR}
   </select>
+  
+  <select id="selectTotalRecord" resultType="int">
+  	select count(1) from users
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" />
+  	from users
+  	<include refid="limitsql"></include>
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from users
     where id = #{id,jdbcType=INTEGER}

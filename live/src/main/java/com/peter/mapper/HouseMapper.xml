@@ -151,6 +151,18 @@
     and phone.user_id=#{userId,jdbcType=INTEGER}
   </select>
   
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 
+    <include refid="House_Base_Column_List" />
+    from house
+    <include refid="limitsql"></include>
+  </select>
+  <select id="selectAllTotalRecord" resultType="int">
+    select 
+    count(1)
+    from house
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from house
     where id = #{id,jdbcType=INTEGER}

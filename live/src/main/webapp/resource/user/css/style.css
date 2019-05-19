@@ -997,7 +997,8 @@ ul.address li ul.agileits-address-text li {
 }
 /* Shuffle and sort controls */
 select {
-    padding: 1rem 1rem;
+	width:100%;
+    padding: 1rem 0rem;
     text-transform: uppercase;
 }
 .sortandshuffle .shuffle-btn {

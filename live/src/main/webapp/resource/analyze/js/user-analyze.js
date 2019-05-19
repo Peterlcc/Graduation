@@ -1,22 +1,29 @@
-function userAnalyze(userSelect, id) {
-	var index=userSelect.selectedIndex;
-	var attr = userSelect.options[index].text;
-	var propertyValue = userSelect.value;
+function userAnalyze(userSelect, id,aggregateSelect,aggregationSelect) {
+	var propertyValue = $('#'+userSelect).val();
+	var attr = $('#'+userSelect).find("option:selected").text();
+	
+	var aggregate=$('#'+aggregateSelect).val();
+	var aggregateAttr=$('#'+aggregateSelect).find("option:selected").text();
+	
+	var aggregation=$('#'+aggregationSelect).val();
+	var aggregationAttr=$('#'+aggregationSelect).find("option:selected").text();
 	$.ajax({
 		type : "POST",
 		url : "/analyze/userAnalyze",
 		dataType : "json",
 		data : {
-			property : propertyValue
+			property : propertyValue,
+			aggregate:aggregate,
+			aggregation:aggregation
 		},
 		success : function(result) {
-			userDraw(result, id, attr);
+			userDraw(result, id, attr,aggregateAttr,aggregationAttr);
 		}
 	});
 
 }
 
-function userDraw(result, id, attr) {
+function userDraw(result, id, attr,aggregateAttr,aggregationAttr) {
 
 	var xdata = new Array();
 	var ydata = new Array();
@@ -33,8 +40,8 @@ function userDraw(result, id, attr) {
 	option = null;
 	option = {
 		    title : {
-		        text: attr,
-		        subtext: 'made by peter',
+		        text: '维度:'+attr+'  度量:'+aggregationAttr+' 聚合方法:'+aggregateAttr,
+		        subtext: 'made by ilive',
 		        x:'center'
 		    },
 		    tooltip : {

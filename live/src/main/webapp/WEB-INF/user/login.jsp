@@ -5,27 +5,16 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-			<title>Live|登录</title> <!-- CSS -->
-			<link rel="stylesheet"
-				href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-				<link rel="stylesheet"
-					href="../../resource/user/css/bootstrap.min.css">
-					<link rel="stylesheet"
-						href="../../resource/user/css/font-awesome.min.css">
-						<!--<link rel="stylesheet" href="css/form-elements.css">-->
-						<link rel="stylesheet"
-							href="../../resource/user/css/loginstyle.css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Live|登录</title> <!-- CSS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+<link rel="stylesheet" href="../../resource/user/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../resource/user/css/font-awesome.min.css">
+<!--<link rel="stylesheet" href="css/form-elements.css">-->
+<link rel="stylesheet" href="../../resource/user/css/loginstyle.css">
 
-							<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-							<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-							<!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-							<link href="../../resource/user/css/bootstrap.min.css"
-								rel="stylesheet" type="text/css" media="all" />
+<link href="../../resource/user/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
 							<!-- Bootstrap stylesheet -->
 							<link href="../../resource/user/css/style.css" rel="stylesheet"
 								type="text/css" media="all" />
@@ -35,10 +24,8 @@
 							<!-- fontawesome -->
 
 							<!-- meta tags -->
-							<meta name="viewport"
-								content="width=device-width, initial-scale=1">
-								<meta http-equiv="Content-Type"
-									content="text/html; charset=utf-8" />
+							<meta name="viewport" content="width=device-width, initial-scale=1">
+								<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 								<meta name="keywords" content="" />
 								<script type="application/x-javascript">
 									 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
@@ -67,8 +54,6 @@
 										<!-- Kick off Filterizr -->
 										<script type="text/javascript">
 											$(function() {
-												//Initialize filterizr with default options
-												//$('.filtr-container').filterizr();
 											});
 										</script>
 										<!-- start-smoth-scrolling -->
@@ -179,7 +164,7 @@
 								</center>
 								<div class="newregister" style="padding: 15px 0 0 0px">
 									<h5>
-										<a hred="<c:url value='/user/forgotPassword'></c:url>">忘记密码？</a>
+										<a href="javascript:void(0)" onclick="alert('改绑邮箱链接已发送至您的邮箱，请注意查收');">忘记密码？</a>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<a style="text-align: right; !important" href="/user/register">没有注册账号？请注册</a>
 									</h5>

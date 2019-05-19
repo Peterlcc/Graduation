@@ -1,16 +1,18 @@
-function allAnalyze(allUserSelect, allHouseSelect, allMiddleSelect, id) {
-	var userIndex = allUserSelect.selectedIndex;
-	var userAttr = allUserSelect.options[userIndex].text;
-	var userPropertyValue = allUserSelect.value;
+function allAnalyze(allUserSelect, allHouseSelect, allMiddleSelect, id,aggregateSelect,aggregationSelect) {
+	var userPropertyValue = $('#'+allUserSelect).val();
+	var userAttr = $('#'+allUserSelect).find("option:selected").text();
+	
+	var housePropertyValue = $('#'+allHouseSelect).val();
+	var houseAttr = $('#'+allHouseSelect).find("option:selected").text();
+	
+	var middlePropertyValue = $('#'+allMiddleSelect).val();
+	var middleAttr = $('#'+allMiddleSelect).find("option:selected").text();
 
-	var houseIndex = allHouseSelect.selectedIndex;
-	var houseAttr = allHouseSelect.options[houseIndex].text;
-	var housePropertyValue = allHouseSelect.value;
-
-	var middleIndex = allMiddleSelect.selectedIndex;
-	var middleAttr = allMiddleSelect.options[middleIndex].text;
-	var middlePropertyValue = allMiddleSelect.value;
-
+	var aggregate=$('#'+aggregateSelect).val();
+	var aggregateAttr=$('#'+aggregateSelect).find("option:selected").text();
+	
+	var aggregation=$('#'+aggregationSelect).val();
+	var aggregationAttr=$('#'+aggregationSelect).find("option:selected").text();
 	$.ajax({
 		type : "POST",
 		url : "/analyze/userAndHouseAnalyze",
@@ -18,16 +20,18 @@ function allAnalyze(allUserSelect, allHouseSelect, allMiddleSelect, id) {
 		data : {
 			userProperty : userPropertyValue,
 			houseProperty : housePropertyValue,
-			middleTable : middlePropertyValue
+			middleTable : middlePropertyValue,
+			aggregate:aggregate,
+			aggregation:aggregation
 		},
 		success : function(result) {
-			allDraw(result, id, userAttr, houseAttr, middleAttr);
+			allDraw(result, id, userAttr, houseAttr, middleAttr,aggregateAttr,aggregationAttr);
 		}
 	});
 
 }
 
-function allDraw(result, id, userAttr, houseAttr, middleAttr) {
+function allDraw(result, id, userAttr, houseAttr, middleAttr,aggregateAttr,aggregationAttr) {
 
 	var hours = new Array();
 	var days = new Array();
@@ -45,14 +49,13 @@ function allDraw(result, id, userAttr, houseAttr, middleAttr) {
 		item[2] = result[i].num;
 		data[i] = item;
 	}
-	console.log(data);
 	var dom = document.getElementById(id);
 	var myChart = echarts.init(dom);
 	var app = {};
 	option = null;
 	option = {
 		title : {
-			text : houseAttr+"-"+userAttr+' 统计,关联自 <'+middleAttr+'> 表'
+			text : '维度:房屋'+houseAttr+"-用户"+userAttr+'  度量:'+aggregationAttr+' 聚合方法:'+aggregateAttr+' 中间表:'+middleAttr,
 		},
 		tooltip : {},
 		visualMap : {

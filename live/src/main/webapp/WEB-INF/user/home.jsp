@@ -112,10 +112,10 @@
 	<div class="main-content" style="padding: 30px">
 
 		<!-- gallery -->
-	<div class="gallery" id="gallery">
+	<div class="gallery" id="gallery" style="padding:0px">
 	<div class="container">
 		<div class="gallery_gds">
-		<form action="/house/home" method="get">
+		<form action="/house/home" method="get" style="width:1125px">
 			<h5 class="select-title" >区域</h5>
 			<c:if test="${not empty houseQueryVo.house }">
 					<c:if test="${not empty houseQueryVo.house.areaCity}">
@@ -136,7 +136,7 @@
 					
 				</c:forEach>
 			</select>
-			&nbsp;&nbsp;
+			
 			<h5 class="select-title">街道</h5>
 			<c:if test="${not empty houseQueryVo.house }">
 					<c:if test="${not empty houseQueryVo.house.street}">
@@ -149,7 +149,7 @@
 					<option class="street" selected="selected" value="${streetStr }">${streetStr }</option>
 				</c:if>
 			</select>
-			&nbsp;&nbsp;
+			
 			<h5 class="select-title">价位</h5>
 			<%
 			java.util.Map<String, String> priceStrs=new TreeMap<>();
@@ -170,7 +170,7 @@
 					out.print("<option class='price' "+(key.equals(priceStr)?"selected='selected'":"")+" value="+key+">"+priceStrs.get(key)+"</option>");
 				} %>
 			</select>
-			<input id="search" onclick="search();" class="submit-select" type="submit" value="查找">
+			<input id="search" onclick="search();" class="submit-select" type="submit" style="margin:10px 0px 10px 50px" value="查找">
 		</form>
             <div class="filtr-container " id="parenthouse" style="padding: 0px; position: relative; height: 858px;">
             <%

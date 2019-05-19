@@ -173,7 +173,8 @@ import="java.util.List"
                 <div class="ins-name" style="height: 10px;"><!--title/price-->
                     <h3 style="float:left" id="housetitle">${house.title}  <!--标题title--></h3>
                     <span id="houseid" hidden="hidden">${house.id}</span>
-                    <button style="float:right" id="focus" style="background-color: gainsboro" onclick="userCollect();">收藏</button>
+                    <a style="float:right" id="focus"  onclick="userCollect();"><i class=" fa fa-star-o" ></i></a>
+                   <font style="float:right">收藏</font>
                 </div>
                 <div style="height:30px;float:left;color: red; font-size: 30px;margin:0 0 15px 0;" id="houseprice">${house.price}元</div><!--价格price-->
                 <div>
@@ -304,7 +305,7 @@ import="java.util.List"
                     <ul>
                         <li>Hebut University</li>
                         <li>Telephone : secret</li>
-                        <li>Email : <a class="mail">We don't konw either.</a></li>
+                        <li>Email : <a class="mail">1414499216@qq.com</a></li>
                     </ul>
                 </address>
             </div>

@@ -239,7 +239,7 @@
                 $.ajax({
                     url: "/user/add",
                     dataType:"json",
-                    data: {name:username, password: password2,sex:sex,major_id:occupation,age:age,eamil:email},
+                    data: {name:username, password: password2,sex:sex,majorId:occupation,age:age,eamil:email},
                     type: "POST",
                     success:function (result) {
                         if(result.result==false){

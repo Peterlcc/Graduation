@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.peter.mapper.HouseAnalyzeMapper">
-	<select id="selectByProperty" parameterType="java.lang.String" resultType="java.util.TreeMap">
+	<select id="selectByProperty" resultType="java.util.TreeMap">
 		select
-		${property} as property,count(1) as num
+		${property} as property,round(${aggregate}(${aggregation}),2) as num
 		from house
 		group by ${property}
 		order by num

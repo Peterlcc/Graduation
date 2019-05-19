@@ -3,6 +3,7 @@ package com.peter.service;
 import java.util.List;
 import java.util.Map;
 
+import com.peter.bean.PageBean;
 import com.peter.bean.ServiceResult;
 import com.peter.bean.User;
 
@@ -16,5 +17,7 @@ public interface UserService {
 	ServiceResult<Boolean> modify(User user);
 	ServiceResult<List<User>> list(int start,int size);
 	
-	List<Map<String, String>> analyzeByProperty(String property);
+	List<Map<String, String>> analyzeByProperty(String property, String aggregate, String aggregation);
+	
+	PageBean<User> getAllUsers(int pc,int ps,String url);
 }

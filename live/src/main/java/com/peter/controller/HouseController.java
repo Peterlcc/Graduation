@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.peter.bean.Area;
 import com.peter.bean.City;
@@ -35,7 +36,6 @@ public class HouseController {
 	@ResponseBody
 	public Area getArea(String name) {
 		Area area = areaService.getAreaByName(name);
-		System.out.println(area.getStreets().size());
 		return area;
 	}
 	
@@ -46,14 +46,16 @@ public class HouseController {
 	}
 
 	@RequestMapping("/home")
-	public String home(HttpServletRequest request) {
+	public ModelAndView home(HttpServletRequest request) {
 		// 查看用户是否已登录
 
+		ModelAndView modelAndView=new ModelAndView();
 		User user = (User) request.getSession().getAttribute("user");
 		if (user == null) {
-			request.setAttribute("errorMsg", "用户未登录，请先登录");
-			request.setAttribute("result", false);
-			return "/user/login";
+			modelAndView.addObject("errorMsg", "用户未登录，请先登录");
+			modelAndView.addObject("result", false);
+			modelAndView.setViewName("redirect:/user/login");
+			return modelAndView;
 		}
 
 		// 获取当前页，默认1
@@ -118,17 +120,20 @@ public class HouseController {
 		request.setAttribute("city", city);
 		String priceStr = URLUtil.getPriceStr(houseQueryVo.getMinPrice(), houseQueryVo.getMaxPrice());
 		if(priceStr!=null) request.setAttribute("priceStr", priceStr);
-		return "/WEB-INF/user/home.jsp";
+		modelAndView.setViewName("/WEB-INF/user/home.jsp");
+		return modelAndView;
 	}
 
 	@RequestMapping("/detail")
-	public String getHouseDetail(HttpServletRequest request) {
+	public ModelAndView getHouseDetail(HttpServletRequest request) {
 
+		ModelAndView modelAndView=new ModelAndView();
 		User user = (User) request.getSession().getAttribute("user");
 		if (user == null) {
-			request.setAttribute("errorMsg", "用户未登录，请先登录");
-			request.setAttribute("result", false);
-			return "/user/login";
+			modelAndView.addObject("errorMsg", "用户未登录，请先登录");
+			modelAndView.addObject("result", false);
+			modelAndView.setViewName("redirect:/user/login");
+			return modelAndView;
 		}
 
 		String idString = request.getParameter("id");
@@ -136,10 +141,11 @@ public class HouseController {
 			throw new RuntimeException("房屋id不能为空");
 		}
 		Integer id = Integer.parseInt(idString);
-		House house = houseService.findById(id);
+		House house = houseService.findById(id,user);
 		request.setAttribute("house", house);
 		System.out.println("recommands size*****"+user.getRecommands().size());
-		return "/WEB-INF/user/houseDetail.jsp";
+		modelAndView.setViewName("/WEB-INF/user/houseDetail.jsp");
+		return modelAndView;
 	}
 
 }

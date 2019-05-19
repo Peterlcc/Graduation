@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.peter.bean.PageBean;
 import com.peter.bean.ServiceResult;
 import com.peter.bean.User;
 import com.peter.mapper.UserAnalyzeMapper;
@@ -76,8 +77,13 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public ServiceResult<Boolean> add(User user) {
-		List<User> users = userMapper.selectByName(user.getName());
 		ServiceResult<Boolean> result=new ServiceResult<>();
+		if (user==null||user.getName()==null) {
+			result.setResult(false);
+			result.setMsg("用户信息不能为空");
+			return result;
+		}
+		List<User> users = userMapper.selectByName(user.getName());
 		if (users==null||users.size()==0) {
 			int insertSelective = userMapper.insertSelective(user);
 			if (insertSelective==1) {
@@ -97,8 +103,19 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public List<Map<String, String>> analyzeByProperty(String property) {
-		return userAnalyzeMapper.selectByProperty(property);
+	public List<Map<String, String>> analyzeByProperty(String property, String aggregate, String aggregation) {
+		return userAnalyzeMapper.selectByProperty(property,aggregate,aggregation);
+	}
+
+	@Override
+	public PageBean<User> getAllUsers(int pc, int ps, String url) {
+		PageBean<User> pageBean=new PageBean<>();
+		pageBean.setTotalRecord(userMapper.selectTotalRecord());
+		pageBean.setCurrentPage(pc);
+		pageBean.setPageSize(ps);
+		pageBean.setBeanList(userMapper.selectAll((pageBean.getCurrentPage()-1)*pageBean.getPageSize(), pageBean.getPageSize()));
+		pageBean.setUrl(url);
+		return pageBean;
 	}
 
 }

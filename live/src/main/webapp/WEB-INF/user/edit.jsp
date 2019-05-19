@@ -105,8 +105,13 @@
 	function editSubmit() {
 		var newpassword = $("#newpassword").val();
 		var passwordConfirm = $("#passwordConfirm").val();
-
-		if (newpassword == '' || passwordConfirm == '') {
+		var password=$("#password").val();
+		if(password==''){
+			alert("密码不能为空");
+			return false;
+		}
+		if (!(newpassword == '' && passwordConfirm == '')) {
+			alert("新密码与确认密码不一致");
 			return false;
 		}
 		if ($("#newpassword").val() == $("#passwordConfirm").val()) {
@@ -213,7 +218,7 @@
 												<input class="profile-input" data-rule-minlength='6'
 													data-rule-password='true' data-rule-required='true'
 													id='password' name='password' placeholder='密码'
-													type='password' value="${sessionScope.user.password }" />
+													type='password' />
 											</div>
 										</div>
 										<div class='control-group'>
@@ -222,7 +227,7 @@
 												<input class="profile-input" data-rule-minlength='6'
 													data-rule-password='true' data-rule-required='true'
 													id='newpassword' name='newpassword' placeholder='新密码'
-													type='password' value="${sessionScope.user.password }" />
+													type='password' />
 											</div>
 										</div>
 										<div class='control-group'>

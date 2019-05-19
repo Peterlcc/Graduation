@@ -4,8 +4,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.peter.bean.Collect;
 import com.peter.bean.House;
@@ -57,10 +56,10 @@ public class UserController {
 	public void getCode(HttpServletResponse response) throws IOException {
 		Object[] images = VerifyUtil.createImage();
 		request.getSession().setAttribute("valicode", images[0]);
-		BufferedImage image=(BufferedImage) images[1];
+		BufferedImage image = (BufferedImage) images[1];
 		response.setContentType("image/png");
-        OutputStream os = response.getOutputStream();
-        ImageIO.write(image, "png", os);
+		OutputStream os = response.getOutputStream();
+		ImageIO.write(image, "png", os);
 
 	}
 
@@ -72,35 +71,41 @@ public class UserController {
 
 	@RequestMapping("/login")
 	public String index() {
+		String errorMsg = request.getParameter("errorMsg");
+		if (errorMsg != null) {
+			request.setAttribute("errorMsg", errorMsg);
+		}
 		return "/WEB-INF/user/login.jsp";
 	}
 
 	@RequestMapping("logout")
-	public String logout() {
+	public ModelAndView logout() {
+		ModelAndView modelAndView=new ModelAndView("/house/ilive");
 		request.getSession().setAttribute("user", null);
-		return "/house/ilive";
+		return modelAndView;
 	}
 
 	@RequestMapping("/getin")
-	public String login() {
+	public ModelAndView login() {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String requestValicode = request.getParameter("valicode");
 		String valicode = (String) request.getSession().getAttribute("valicode");
-		if (valicode==null) {
+		if (valicode == null) {
 			throw new RuntimeException("会话的验证码为null");
 		}
-		System.out.println(valicode + " -- " + requestValicode);
+		ModelAndView modelAndView = new ModelAndView();
 		if (username == null || username.trim().equals("") || password == null || password.trim().equals("")) {
-			request.setAttribute("errorMsg", "用户名或密码不能为空");
-			request.setAttribute("result", false);
-			return "redirect:/user/login";
-			// throw new RuntimeException("用户名或密码不能为空");
+			modelAndView.addObject("errorMsg", "用户名或密码不能为空");
+			modelAndView.addObject("result", false);
+			modelAndView.setViewName("redirect:/user/login");
+			return modelAndView;
 		}
 		if (!valicode.toLowerCase().equals(requestValicode.toLowerCase())) {
-			request.setAttribute("errorMsg", "验证码错误");
-			request.setAttribute("result", false);
-			return "redirect:/user/login";
+			modelAndView.addObject("errorMsg", "验证码错误");
+			modelAndView.addObject("result", false);
+			modelAndView.setViewName("redirect:/user/login");
+			return modelAndView;
 		}
 		User user = new User();
 		user.setId(null);
@@ -109,63 +114,60 @@ public class UserController {
 
 		ServiceResult<Boolean> result = userService.login(user);
 		if (!result.getResult()) {
-			request.setAttribute("errorMsg", result.getMsg());
-			request.setAttribute("result", result.getResult());
-			return "redirect:/user/login";
+			modelAndView.addObject("errorMsg", result.getMsg());
+			modelAndView.addObject("result", result.getResult());
+			modelAndView.setViewName("redirect:/user/login");
+			return modelAndView;
 		} else {
 			request.getSession().setAttribute("user", user);
-			request.setAttribute("errorMsg", result.getMsg());
-			request.setAttribute("result", result.getResult());
-			return "/house/home";
+			modelAndView.setViewName("redirect:/house/ilive");
+			return modelAndView;
 		}
 	}
 
 	@RequestMapping("/detail")
-	public String editDetail() throws UnsupportedEncodingException {
+	public ModelAndView editDetail() throws UnsupportedEncodingException {
+		ModelAndView modelAndView=new ModelAndView();
 		User user = (User) request.getSession().getAttribute("user");
 		if (user == null) {
-			return "redirect:/user/login?errorMsg=" + URLEncoder.encode("用户未登录，请先登录", "utf-8") + "&result=" + false;
+			modelAndView.addObject("errorMsg", "用户未登录，请先登录");
+			modelAndView.addObject("result", false);
+			modelAndView.setViewName("redirect:/user/login");
+			return modelAndView;
 		}
-		String modifyMsgParam = request.getParameter("modifyMsg");
-		if (modifyMsgParam != null && !modifyMsgParam.equals("")) {
-
-			String modifyMsg = URLDecoder.decode(modifyMsgParam, "utf-8");
+		String modifyMsg = request.getParameter("modifyMsg");
+		if (modifyMsg != null && !modifyMsg.equals("")) {
 			request.setAttribute("modifyMsg", modifyMsg);
 		}
-
-		return "/WEB-INF/user/edit.jsp";
+		modelAndView.setViewName("/WEB-INF/user/edit.jsp");
+		return modelAndView;
 	}
 
 	@RequestMapping("/modify")
-	public void modify(User user, HttpServletResponse response) throws IOException {
+	public ModelAndView modify(User user) throws IOException {
 		User userOld = (User) request.getSession().getAttribute("user");
-		
+
 		user.setId(userOld.getId());
-		String modifyMsg = null;
 		String passwordConfirm = request.getParameter("passwordConfirm");
 		String newpassword = request.getParameter("newpassword");
-		if ((!user.equals(userOld)) && passwordConfirm != null
-				&&!passwordConfirm.equals("")&&newpassword!=null 
-				&& passwordConfirm.equals(newpassword)) {
+		ModelAndView modelAndView=new ModelAndView();
+		if (passwordConfirm!=null&&newpassword!=null&&!passwordConfirm.equals(newpassword)) {
+			modelAndView.addObject("modifyMsg", "新密码与确认密码不一致");
+		}
+		else if (!user.equals(userOld)) {
 			userService.modify(user);
-			modifyMsg = "修改成功";
+			modelAndView.addObject("modifyMsg", "修改成功");
 			request.getSession().setAttribute("user", user);
 		} else {
-			modifyMsg = "用户没有信息修改或者新密码与确认密码不一致";
+			modelAndView.addObject("modifyMsg", "用户没有信息修改");
 		}
-		response.sendRedirect("/user/detail?modifyMsg=" + URLEncoder.encode(modifyMsg, "utf-8"));
+		modelAndView.setViewName("redirect:/user/detail");
+		return modelAndView;
 	}
 
 	@RequestMapping("/add")
 	@ResponseBody
-	public ServiceResult<Boolean> userAdd(HttpServletRequest request) {
-		String username = request.getParameter("name");
-		String password = request.getParameter("password");
-		String sex = request.getParameter("sex");
-		String majorId = request.getParameter("major_id");
-		String age = request.getParameter("age");
-		String email = request.getParameter("eamil");
-		User user = new User(null, username, password, sex, Integer.parseInt(age), email, Integer.parseInt(majorId));
+	public ServiceResult<Boolean> userAdd(User user) {
 		System.out.println(user);
 		ServiceResult<Boolean> result = userService.add(user);
 		return result;
@@ -196,10 +198,14 @@ public class UserController {
 	}
 
 	@RequestMapping("/collectedHouses")
-	public String collectedHouses() throws UnsupportedEncodingException {
+	public ModelAndView collectedHouses() throws UnsupportedEncodingException {
+		ModelAndView modelAndView=new ModelAndView();
 		User user = (User) request.getSession().getAttribute("user");
 		if (user == null) {
-			return "redirect:/user/login?errorMsg=" + URLEncoder.encode("用户未登录，请先登录", "utf-8") + "&result=" + false;
+			modelAndView.addObject("errorMsg", "用户未登录，请先登录");
+			modelAndView.addObject("result", false);
+			modelAndView.setViewName("redirect:/user/login");
+			return modelAndView;
 		}
 		if (user.getId() == null) {
 			throw new RuntimeException("collectedHouses:userId不能为空");
@@ -222,17 +228,22 @@ public class UserController {
 		PageBean<House> pageBean = houseService.getCollectHouses(user.getId(), pc, ps, url);
 		request.setAttribute("pageBean", pageBean);
 		System.out.println(pageBean.getTotalPage());
-		return "/WEB-INF/user/collectedHouses.jsp";
+		modelAndView.setViewName("/WEB-INF/user/collectedHouses.jsp");
+		return modelAndView;
 	}
 
 	@RequestMapping("/logedHouses")
-	public String logedHouses() throws UnsupportedEncodingException {
+	public ModelAndView logedHouses() throws UnsupportedEncodingException {
+		ModelAndView modelAndView=new ModelAndView();
 		User user = (User) request.getSession().getAttribute("user");
 		if (user == null) {
-			return "redirect:/user/login?errorMsg=" + URLEncoder.encode("用户未登录，请先登录", "utf-8") + "&result=" + false;
+			modelAndView.addObject("errorMsg", "用户未登录，请先登录");
+			modelAndView.addObject("result", false);
+			modelAndView.setViewName("redirect:/user/login");
+			return modelAndView;
 		}
 		if (user.getId() == null) {
-			throw new RuntimeException("logedHouses:userId不能为空");
+			throw new RuntimeException("collectedHouses:userId不能为空");
 		}
 		// 获取当前页，默认1
 		int pc = 1;
@@ -252,17 +263,22 @@ public class UserController {
 		PageBean<House> pageBean = houseService.getLogHouses(user.getId(), pc, ps, url);
 		request.setAttribute("pageBean", pageBean);
 		System.out.println(pageBean.getTotalPage());
-		return "/WEB-INF/user/logedHouses.jsp";
+		modelAndView.setViewName("/WEB-INF/user/logedHouses.jsp");
+		return modelAndView;
 	}
 
 	@RequestMapping("/phonedHouses")
-	public String phoneedHouses() throws UnsupportedEncodingException {
+	public ModelAndView phoneedHouses() throws UnsupportedEncodingException {
+		ModelAndView modelAndView=new ModelAndView();
 		User user = (User) request.getSession().getAttribute("user");
 		if (user == null) {
-			return "redirect:/user/login?errorMsg=" + URLEncoder.encode("用户未登录，请先登录", "utf-8") + "&result=" + false;
+			modelAndView.addObject("errorMsg", "用户未登录，请先登录");
+			modelAndView.addObject("result", false);
+			modelAndView.setViewName("redirect:/user/login");
+			return modelAndView;
 		}
 		if (user.getId() == null) {
-			throw new RuntimeException("logedHouses:userId不能为空");
+			throw new RuntimeException("collectedHouses:userId不能为空");
 		}
 		// 获取当前页，默认1
 		int pc = 1;
@@ -282,6 +298,7 @@ public class UserController {
 		PageBean<House> pageBean = houseService.getPhoneHouses(user.getId(), pc, ps, url);
 		request.setAttribute("pageBean", pageBean);
 		System.out.println(pageBean.getTotalPage());
-		return "/WEB-INF/user/phonedHouses.jsp";
+		modelAndView.setViewName("/WEB-INF/user/phonedHouses.jsp");
+		return modelAndView;
 	}
 }

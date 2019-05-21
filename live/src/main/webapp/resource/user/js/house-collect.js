@@ -16,7 +16,7 @@ function setCollect(){
 			console.log(collect);
 			if(collect!=null){
 				var focus=document.getElementById("focus");
-				focus.style.background='red';
+				focus.children[0].setAttribute("class","fa fa-star text-red");
 			}
 		}
 	});
@@ -33,15 +33,15 @@ function userCollect(){
 			houseId:houseId
 		},
 		success : function(collect) {
-			console.log(collect);
+			//console.log(collect);
 		}
 	});
 	var focus=document.getElementById("focus");
-	if(focus.style.backgroundColor=='red'){
-		document.getElementById("focus").style.backgroundColor="gainsboro";
+	if(focus.children[0].getAttribute("class")=='fa fa-star text-red'){
+		focus.children[0].setAttribute("class","fa fa-star-o");
 	}
 	else {
-		document.getElementById("focus").style.backgroundColor="red";
+		focus.children[0].setAttribute("class","fa fa-star text-red");
 	}
 	
 	

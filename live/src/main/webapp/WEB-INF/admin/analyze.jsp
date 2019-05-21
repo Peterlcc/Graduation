@@ -110,7 +110,7 @@
 						<div id="all-chart"></div>
 						<div class="candile-inner">
 						<div>
-							<h3 style="display: inline" class="sub-tittle">房屋用户关联统计信息</h3>
+							<h3 style="display: inline;margin:0 10px 0 0" class="sub-tittle">房屋用户关联统计信息</h3>
 							 <select id="allHouseAttrSelect"
 								onchange="allAnalyze('allUserAttrSelect','allHouseAttrSelect','allMiddleAttrSelect','all-map','allAggregateSelect','allAggregationSelect');"
 								class="condition-select" data-selector>

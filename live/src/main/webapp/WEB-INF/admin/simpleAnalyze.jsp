@@ -131,8 +131,8 @@
 						<div id="user-chart"></div>
 						<div class="candile">
 							<div class="candile-inner">
-								<h3 style="display: inline" class="sub-tittle">用户统计信息</h3>
-								&nbsp;&nbsp;&nbsp; <select class="condition-select"
+								<h3 style="display: inline;margin:0 10px 0 0" class="sub-tittle">用户统计信息</h3>
+								<select class="condition-select"
 									onchange="userAnalyze('userAttrSelect','user-map','userAggregateSelect','userAggregationSelect');"
 									id="userAttrSelect"
 									data-selector>
@@ -140,14 +140,14 @@
 									<option value="sex">性别</option>
 									<option value="majors.name">职业</option>
 								</select>
-								&nbsp;&nbsp;&nbsp; <select id="userAggregateSelect"
+								<select id="userAggregateSelect"
 								onchange="userAnalyze('userAttrSelect','user-map','userAggregateSelect','userAggregationSelect');"
 								class="condition-select" data-selector>
 								<option value="sum">求和</option>
 								<option value="avg">求平均</option>
 								<option value="count">计数</option>
 							</select>
-							&nbsp;&nbsp;&nbsp; <select id="userAggregationSelect"
+							<select id="userAggregationSelect"
 								onchange="userAnalyze('userAttrSelect','user-map','userAggregateSelect','userAggregationSelect');"
 								class="condition-select" data-selector>
 								<option value="age">年龄</option>

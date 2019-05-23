@@ -34,7 +34,6 @@
     where recommand.user_id = #{userId,jdbcType=INTEGER}
     and recommand.house_id=house.id
     and house.area_city=#{area,jdbcType=VARCHAR}
-    and house.street=#{street,jdbcType=VARCHAR}
     order by score desc
     limit 4
   </select>
@@ -43,7 +42,7 @@
     <include refid="Base_Column_List" />
     from recommand
     ORDER BY RAND()
-    LIMIT 4
+    LIMIT #{size,jdbcType=INTEGER}
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">

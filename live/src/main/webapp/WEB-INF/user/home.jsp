@@ -192,7 +192,7 @@
 										<c:set var="houseTitle" value="${bean.title}"></c:set>
 									</c:otherwise>
 								</c:choose>
-								<img class="imgsrc" src="${bean.imgUrls[0] }" alt="${houseTitle}" />
+								<img class="imgsrc" src="${bean.imgUrls[0] }" alt="${houseTitle}"  onerror="this.onerror='';src='../../resource/user/images/imgback.jpg'"/>
 								<span class="jm-item-overlay"> </span>
 								<div class="jm-item-button"><a>详细内容</a></div>
 							</div>

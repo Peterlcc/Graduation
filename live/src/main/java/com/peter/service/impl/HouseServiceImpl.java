@@ -32,10 +32,10 @@ public class HouseServiceImpl implements HouseService {
 	@Override
 	public House findById(int id,User user) {
 		House house = houseMapper.selectByPrimaryKey(id);
-		List<Recommand> recommands = recommandMapper.selectByUser(user.getId(), house.getAreaCity(), house.getStreet());
+		List<Recommand> recommands = recommandMapper.selectByUser(user.getId(), house.getAreaCity());
 		user.setRecommands(recommands);
 		if (user.getRecommands()==null||user.getRecommands().size()<4) {
-			user.setRecommands(recommandMapper.selectRandomly());
+			user.getRecommands().addAll(recommandMapper.selectRandomly(4-user.getRecommands().size()));
 		}
 		return house;
 	}

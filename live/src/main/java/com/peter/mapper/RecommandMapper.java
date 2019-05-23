@@ -15,8 +15,8 @@ public interface RecommandMapper {
 
     Recommand selectByPrimaryKey(Integer id);
     List<Recommand> selectByUser(@Param("userId")Integer userId,
-    		@Param("area")String area,@Param("street")String street);
-    List<Recommand> selectRandomly();
+    		@Param("area")String area);
+    List<Recommand> selectRandomly(@Param("size")Integer size);
 
     int updateByPrimaryKeySelective(Recommand record);
 

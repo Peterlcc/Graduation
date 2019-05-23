@@ -166,7 +166,7 @@
 			                        <button id="submit" class="btn"  style="line-height: 20px;width:100%;background-color:green;color:white">注册</button>
 			                        
 			                        <div class="newlogin" style="padding: 15px  0 0 295px">
-                   		       			<h5>已有账号？<a href="login.html">请登录</a></h5>	
+                   		       			<h5>已有账号？<a href="/user/login">请登录</a></h5>	
                    		        	</div>
 
 		                    </div>
@@ -229,10 +229,10 @@
             if(email.indexOf("@")==-1){
             	alert('邮箱不正确');
             }
-            if(password1!=password2){
+            else if(password1!=password2){
                 alert('两次密码不一致！');
 			}
-			else if(username==""||password1==""||password2==""||sex==""||occupation==""){
+			else if(username==""||password1==""||password2==""||sex==""||occupation==""||age==""){
                 alert("请填写完整信息！");
 			}
             else {

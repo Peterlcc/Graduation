@@ -49,7 +49,7 @@
                     <div class="navbar-header">
                         
                         <div class="logo">
-                            <h1><a href="/house/ilive"> iLive</a></h1>
+                            <h1><a href="javascript:void(0);"> iLive</a></h1>
                         </div>
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -183,7 +183,7 @@
         <div class="footer-top">
             <div class="container">
                 <div class="col-md-4 footer-top-left">
-                    <h3><a href="index.html">iLive</a></h3>
+                    <h3><a href="/house/ilive">iLive</a></h3>
                 </div>
                 <div class="col-md-4 footer-top-mid">
                     <h3>Our Program</h3>
@@ -201,7 +201,7 @@
                         <ul>
                             <li>Hebut University</li>
                             <li>Telephone : 10096</li>
-                            <li>Email : <a class="mail">1414499216@qq.com</a></li>
+                            <li>Email : <a class="mail" href="javascript:void(0);">1414499216@qq.com</a></li>
                         </ul>
                     </address>
                 </div>

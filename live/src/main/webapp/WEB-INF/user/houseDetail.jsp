@@ -117,7 +117,7 @@ a:visited {
 
 						<div class="logo">
 							<h1>
-								<a style="color: #00c5b5">iLive</a>
+								<a href="/house/ilive" style="color: #00c5b5">iLive</a>
 							</h1>
 						</div>
 					</div>
@@ -127,8 +127,6 @@ a:visited {
 						id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav">
 							<li id="userId" style="display: none" value="${user.id}">${user.id}</li>
-							<%-- <li class="active"><a href="/house/home" >主页</a></li>
-					<li><a id="getusername">${user.name}</a></li> --%>
 							<li><a href="/house/ilive">Home</a></li>
 							<li class="active"><a href="/house/home">租房</a></li>
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -343,7 +341,8 @@ a:visited {
 						<a><figure>
 								<img class="img-responsive1"
 									style="width: 200px; height: 150px;"
-									src="${recommand.house.imgUrls[0]}" alt="" />
+									src="${recommand.house.imgUrls[0]}" alt="" 
+									onerror="this.onerror='';src='../../resource/user/images/imgback.jpg'"/>
 							</figure></a> <a class="recom">${recommand.house.title}</a>
 					</div>
 				</c:forEach>
@@ -366,7 +365,7 @@ a:visited {
 				<div class="col-md-4 footer-top-mid">
 					<h3>Our Program</h3>
 					<ul>
-						<li><a href="/house/home"><i
+						<li><a href="/house/ilive"><i
 								class="fa fa-long-arrow-right" aria-hidden="true"></i>主页</a></li>
 						<li><a href="/house/about"><i
 								class="fa fa-long-arrow-right" aria-hidden="true"></i>关于我们</a></li>
@@ -382,7 +381,7 @@ a:visited {
 						<ul>
 							<li>Hebut University</li>
 							<li>Telephone : secret</li>
-							<li>Email : <a class="mail">1414499216@qq.com</a></li>
+							<li>Email : <a class="mail" href="javascript:void(0);">1414499216@qq.com</a></li>
 						</ul>
 					</address>
 				</div>

@@ -114,7 +114,7 @@
 
 						<div class="logo">
 							<h1>
-								<a style="color: #00c5b5">iLive</a>
+								<a style="color: #00c5b5" href="/house/ilive">iLive</a>
 							</h1>
 						</div>
 					</div>
@@ -280,18 +280,18 @@
 			<div class="container">
 				<div class="col-md-4 footer-top-left">
 					<h3>
-						<a>iLive</a>
+						<a href="/house/ilive">iLive</a>
 					</h3>
 				</div>
 				<div class="col-md-4 footer-top-mid">
 					<h3>Our Program</h3>
 					<ul>
-						<li><a href="properties.html"><i
+						<li><a href="/house/ilive"><i
 								class="fa fa-long-arrow-right" aria-hidden="true"></i>主页</a></li>
 
-						<li><a href="register.html"><i
+						<li><a href="/user/register"><i
 								class="fa fa-long-arrow-right" aria-hidden="true"></i>注册</a></li>
-						<li><a href="login.html"><i
+						<li><a href="/user/login"><i
 								class="fa fa-long-arrow-right" aria-hidden="true"></i>登录</a></li>
 
 					</ul>
@@ -302,7 +302,7 @@
 						<ul>
 							<li>Hebut University</li>
 							<li>Telephone : 13820872310</li>
-							<li>Email : <a class="mail">1414499216@qq.com</a></li>
+							<li>Email : <a class="mail" href="javascript:void(0);">1414499216@qq.com</a></li>
 						</ul>
 					</address>
 				</div>

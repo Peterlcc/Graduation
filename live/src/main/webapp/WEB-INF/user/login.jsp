@@ -98,7 +98,7 @@
 
 				<div class="logo">
 					<h1>
-						<a href="index.html"> iLive</a>
+						<a href="/house/ilive"> iLive</a>
 					</h1>
 				</div>
 			</div>
@@ -183,7 +183,7 @@
 		<div class="container">
 			<div class="col-md-4 footer-top-left">
 				<h3>
-					<a href="index.html">iLive</a>
+					<a href="/house/ilive">iLive</a>
 				</h3>
 			</div>
 			<div class="col-md-4 footer-top-mid">
@@ -205,7 +205,7 @@
 					<ul>
 						<li>Hebut University</li>
 						<li>Telephone : secret</li>
-						<li>Email : <a class="mail">1414499216@qq.com</a></li>
+						<li>Email : <a href="javascript:void(0);" class="mail">1414499216@qq.com</a></li>
 					</ul>
 				</address>
 			</div>

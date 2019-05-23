@@ -14,6 +14,8 @@
 <!-- stylesheet -->
 <link href="../../resource/user/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css" media="all" />
+<!-- icon图标 -->
+<link rel="icon" href="../../resource/user/images/logoilive.png" type="image/png">
 <!-- fontawesome -->
 <!-- meta tags -->
 <meta name="viewport" content="width=device-width, initial-scale=1">

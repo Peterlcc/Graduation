@@ -14,6 +14,8 @@
 	rel="stylesheet" media="screen">
 <link href="../../resource/admin/assets/styles.css" rel="stylesheet"
 	media="screen">
+<!-- icon图标 -->
+<link rel="icon" href="../../resource/user/images/logoilive.png" type="image/png">
 <script
 	src="../../resource/admin/vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </head>

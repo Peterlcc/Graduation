@@ -13,7 +13,8 @@
 <link rel="stylesheet" href="../../resource/user/css/font-awesome.min.css">
 <!--<link rel="stylesheet" href="css/form-elements.css">-->
 <link rel="stylesheet" href="../../resource/user/css/loginstyle.css">
-
+<!-- icon图标 -->
+<link rel="icon" href="../../resource/user/images/logoilive.png" type="image/png">
 <link href="../../resource/user/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
 							<!-- Bootstrap stylesheet -->
 							<link href="../../resource/user/css/style.css" rel="stylesheet"

@@ -21,6 +21,8 @@
 	<link href="http://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!--//fonts-->
+	<!-- icon图标 -->
+<link rel="icon" href="../../resource/user/images/logoilive.png" type="image/png">
     <script src="../../resource/user/js/jquery.min.js" type="text/javascript"></script>
     <!-- Include jQuery & Filterizr -->
 	<script type="text/javascript" src="../../resource/user/js/jquery-2.1.4.min.js"></script><!-- Required-js -->

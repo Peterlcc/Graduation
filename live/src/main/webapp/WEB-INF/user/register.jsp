@@ -8,7 +8,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>iLive|注册</title>
-
+<!-- icon图标 -->
+<link rel="icon" href="../../resource/user/images/logoilive.png" type="image/png">
 	<!-- CSS -->
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
 	<link rel="stylesheet" href="../../resource/user/css/bootstrap.min.css">

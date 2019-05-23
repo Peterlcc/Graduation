@@ -8,6 +8,8 @@
 <html lang="en">
 <head>
 <title>ilive|房屋详情</title>
+<!-- icon图标 -->
+<link rel="icon" href="../../resource/user/images/logoilive.png" type="image/png">
 <link href="../../resource/user/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css" media="all" />
 <!-- Bootstrap stylesheet -->

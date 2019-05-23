@@ -18,6 +18,8 @@
 <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
 <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 <!--//fonts-->	        
+<!-- icon图标 -->
+<link rel="icon" href="../../resource/user/images/logoilive.png" type="image/png">
 <script type="text/javascript" src="../../resource/user/js/jquery-2.1.4.min.js"></script><!-- Required-js -->
 <!-- requried-jsfiles-for owl -->
 	<link href="../../resource/user/css/owl.carousel.css" rel="stylesheet" type="text/css" media="all" />

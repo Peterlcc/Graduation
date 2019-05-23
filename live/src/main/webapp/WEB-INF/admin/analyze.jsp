@@ -20,6 +20,8 @@
 <link href="../../resource/analyze/css/font-awesome.css"
 	rel="stylesheet">
 <!-- jQuery -->
+<!-- icon图标 -->
+<link rel="icon" href="../../resource/user/images/logoilive.png" type="image/png">
 <!-- lined-icons -->
 <link rel="stylesheet"
 	href="../../resource/analyze/css/icon-font.min.css" type='text/css' />

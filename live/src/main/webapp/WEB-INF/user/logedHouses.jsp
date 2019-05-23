@@ -8,6 +8,8 @@
 <title>iLive|快速租房好帮手</title>
 <link href="../../resource/user/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css" media="all" />
+<!-- icon图标 -->
+<link rel="icon" href="../../resource/user/images/logoilive.png" type="image/png">
 <!-- Bootstrap stylesheet -->
 <link href="../../resource/user/css/style.css" rel="stylesheet"
 	type="text/css" media="all" />

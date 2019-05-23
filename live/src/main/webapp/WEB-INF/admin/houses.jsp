@@ -24,6 +24,8 @@
 
 
 </script>
+<!-- icon图标 -->
+<link rel="icon" href="../../resource/user/images/logoilive.png" type="image/png">
 <!-- Bootstrap Core CSS -->
 <link href="../../resource/analyze/css/bootstrap.min.css"
 	rel='stylesheet' type='text/css' />

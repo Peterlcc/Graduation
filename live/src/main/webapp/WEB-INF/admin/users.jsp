@@ -23,6 +23,8 @@
 <!-- Bootstrap Core CSS -->
 <link href="../../resource/analyze/css/bootstrap.min.css"
 	rel='stylesheet' type='text/css' />
+<!-- icon图标 -->
+<link rel="icon" href="../../resource/user/images/logoilive.png" type="image/png">
 <link rel="stylesheet" href="../../resource/user/css/page.css" type="text/css">
 <!-- Custom CSS -->
 <link href="../../resource/analyze/css/style.css" rel='stylesheet'

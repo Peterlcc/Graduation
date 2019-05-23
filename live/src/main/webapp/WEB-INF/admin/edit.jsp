@@ -24,6 +24,8 @@
 	type='text/css' />
 <link href="../../resource/analyze/css/conditon-select.css"
 	rel='stylesheet' type='text/css' />
+<!-- icon图标 -->
+<link rel="icon" href="../../resource/user/images/logoilive.png" type="image/png">
 <!-- Graph CSS -->
 <link href="../../resource/analyze/css/font-awesome.css"
 	rel="stylesheet">

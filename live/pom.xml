@@ -39,12 +39,8 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 			<!-- 移除嵌入式tomcat插件 -->
-			<!-- <exclusions>
-				<exclusion>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-tomcat</artifactId>
-				</exclusion>
-			</exclusions> -->
+			<!-- <exclusions> <exclusion> <groupId>org.springframework.boot</groupId> 
+				<artifactId>spring-boot-starter-tomcat</artifactId> </exclusion> </exclusions> -->
 		</dependency>
 
 		<dependency>
@@ -94,6 +90,11 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.47</version>
 		</dependency>
+		<dependency>
+            <groupId>com.github.ulisesbocchio</groupId>
+            <artifactId>jasypt-spring-boot-starter</artifactId>
+            <version>1.14</version>
+        </dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -136,7 +137,7 @@
 	</dependencies>
 
 	<build>
-	<finalName>live-3.0.0</finalName>
+		<finalName>live-3.0.0</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -189,19 +190,19 @@
 		<resources>
 			<resource>
 				<!-- ⭐️JSP包打包到资源里 -->
-                <directory>src/main/webapp</directory>
-                <targetPath>META-INF/resources</targetPath>
-                <includes>
-                    <include>**/**</include>
-                </includes>
+				<directory>src/main/webapp</directory>
+				<targetPath>META-INF/resources</targetPath>
+				<includes>
+					<include>**/**</include>
+				</includes>
 			</resource>
 			<resource>
 				<!-- ⭐️其他资打包到资源里 -->
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>**/**</include>
-                </includes>
-                <filtering>false</filtering>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/**</include>
+				</includes>
+				<filtering>false</filtering>
 			</resource>
 			<resource>
 				<!-- ⭐️mapperxml打包到资源里 -->

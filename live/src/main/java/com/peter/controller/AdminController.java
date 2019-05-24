@@ -113,7 +113,7 @@ public class AdminController {
 			throw new RuntimeException("管理员未登录");
 		}
 		ModelAndView modelAndView=new ModelAndView();
-		admin.setId(admin.getId());
+		admin.setId(adminOld.getId());
 		String passwordConfirm = request.getParameter("passwordConfirm");
 		String newpassword = request.getParameter("newpassword");
 		if ((!admin.equals(adminOld)) && passwordConfirm != null && !passwordConfirm.equals("") && newpassword != null

@@ -22,7 +22,7 @@
 <body id="login">
 	<div class="container">
 		<c:if test="${not empty errorMsg }">
-			<font color="red">${errorMsg }</font>
+			<center><font color="red">${errorMsg }</font></center>
 		</c:if>
 		<form id="form-login" class="form-signin" method="post"
 			action="/admin/getin">

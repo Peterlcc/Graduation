@@ -87,8 +87,6 @@
 	href="../../resource/user/css/conditon-select.css" type="text/css">
 
 
-
-
 <!-- / flatty theme -->
 <link href='../../resource/edit/assets/stylesheets/light-theme.css'
 	id='color-settings-body-color' media='all' rel='stylesheet'
@@ -102,14 +100,33 @@
 	type='text/css' />
 <script type="text/javascript">
 	function editSubmit() {
+		var newpassword = $("#newpassword").val();
+		var passwordConfirm = $("#passwordConfirm").val();
 		var password=$("#password").val();
 		if(password==''){
 			alert("密码不能为空");
 			return false;
 		}
+		if (newpassword == '' || passwordConfirm == '') {
+			alert("新密码或者确认密码不能为空");
+			return false;
+		}
+		else if(newpassword!=passwordConfirm){
+			alert("新密码与确认密码不一致");
+			return false;
+		}
+		else{
+			return true;
+		}
 
 	};
 </script>
+<script type="text/javascript">
+	window.onload = function() {
+		profileReadOnly();
+	};
+</script>
+
 <!-- / demo -->
 <body class='contrast-red '>
 	<header>
@@ -160,10 +177,10 @@
 		<nav class='' id='main-nav'>
 			<div class='navigation'>
 				<ul class='nav nav-stacked'>
-					<li class=''><a class="disable" href="javascript:void(0)">
-							<i class='icon-user text-green'></i> <span>个人信息修改</span>
+					<li class=''><a href='/user/detail'> <i class='icon-user text-green'></i>
+							<span>个人信息修改</span>
 					</a></li>
-					<li class=''><a href="/user/passwordEdit">
+					<li class=''><a class="disable" href="javascript:void(0)">
 							<i class='icon-cog text-green'></i> <span>修改密码</span>
 					</a></li>
 					<li class=''><a href='/user/collectedHouses'> <i
@@ -185,21 +202,22 @@
 						<div class='row-fluid'>
 							<div class='span12 box'>
 								<div class='box-header blue-background'>
-									<div class='title'>个人信息修改</div>
-									<c:if test="${not empty modifyMsg }">
-										<div class='text-orange'>&lt;${modifyMsg }&gt;</div>
+									<div class='title'>密码修改</div>
+									<c:if test="${not empty passwordModifyMsg }">
+										<div class='text-orange'>&lt;${passwordModifyMsg }&gt;</div>
 									</c:if>
 								</div>
 								<div class='box-content'>
 									<form id="editForm" class='form form-horizontal validate-form'
-										style='margin-bottom: 0;' action="/user/modify" method="post"
+										style='margin-bottom: 0;' action="/user/passwordModify" method="post"
 										onsubmit="return editSubmit();">
 										<div class='control-group'>
 											<label class='control-label' for='name'>用户名</label>
 											<div class='controls'>
-												<input class="profile-input" data-rule-minlength='2'
+												<input data-rule-minlength='2'
 													data-rule-required='true' id='name' name='name'
 													placeholder='用户名' type='text'
+													disabled="disabled"
 													value="${sessionScope.user.name }" />
 											</div>
 										</div>
@@ -213,68 +231,27 @@
 													type='password' />
 											</div>
 										</div>
+										<div class='control-group'>
+											<label class='control-label' for='newpassword'>新密码</label>
+											<div class='controls'>
+												<input class="profile-input" data-rule-minlength='6'
+													data-rule-password='true' data-rule-required='true'
+													id='newpassword' name='newpassword' placeholder='新密码'
+													type='password' />
+											</div>
+										</div>
+										<div class='control-group'>
+											<label class='control-label' for='passwordConfirm'>新密码确认</label>
+											<div class='controls'>
+												<input class="profile-input"
+													data-rule-equalto='#validation_password'
+													data-rule-required='true' id='passwordConfirm'
+													name='passwordConfirm' placeholder='确认密码' type='password' />
+											</div>
+										</div>
 										
-										<div class='control-group'>
-											<label class='control-label' for='email'>邮箱</label>
-											<div class='controls'>
-												<input class="profile-input" data-rule-email='true'
-													data-rule-required='true' id='email' name='email'
-													placeholder='邮箱' type="email"
-													value="${sessionScope.user.email }" />
-											</div>
-										</div>
-										<div class='control-group'>
-											<label class='control-label' for='age'>年龄</label>
-											<div class='controls'>
-												<input class="profile-input" data-rule-email='true'
-													data-rule-required='true' id='age' name='age'
-													placeholder='年龄' type="number"
-													value="${sessionScope.user.age }" />
-											</div>
-										</div>
-										<div class='control-group'>
-											<label class='control-label' for='sex'>性别</label>
-											<div class='controls'>
-												<select class="profile-input" data-rule-required='true'
-													id='sex' name='sex'>
-													<c:choose>
-														<c:when test="${'男' eq sessionScope.user.sex }">
-															<option selected="selected" value="男">男</option>
-														</c:when>
-														<c:otherwise>
-															<option value="男">男</option>
-														</c:otherwise>
-													</c:choose>
-													<c:choose>
-														<c:when test="${'女' eq sessionScope.user.sex }">
-															<option selected="selected" value="女">女</option>
-														</c:when>
-														<c:otherwise>
-															<option value="女">女</option>
-														</c:otherwise>
-													</c:choose>
-												</select>
-											</div>
-										</div>
-										<div class='control-group'>
-											<label class='control-label' for='majorSelect'>职业</label>
-											<div class='controls'>
-												<select class="profile-input" data-rule-required='true'
-													id='majorSelect' name='majorId'>
-													<c:forEach items="${applicationScope.allMajors }"
-														var="major">
-														<c:choose>
-															<c:when test="${major.id eq sessionScope.user.majorId }">
-																<option selected="selected" value="${major.id }">${major.name }</option>
-															</c:when>
-															<c:otherwise>
-																<option value="${major.id }">${major.name }</option>
-															</c:otherwise>
-														</c:choose>
-													</c:forEach>
-												</select>
-											</div>
-										</div>
+										
+										
 										<div class='form-actions' style='margin-bottom: 0'>
 											<button class='btn btn-info' type="button"
 												onclick="profileEnable();">

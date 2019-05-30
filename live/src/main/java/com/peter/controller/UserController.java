@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -80,7 +81,7 @@ public class UserController {
 
 	@RequestMapping("logout")
 	public ModelAndView logout() {
-		ModelAndView modelAndView=new ModelAndView("/house/ilive");
+		ModelAndView modelAndView = new ModelAndView("redirect:/house/ilive");
 		request.getSession().setAttribute("user", null);
 		return modelAndView;
 	}
@@ -127,7 +128,7 @@ public class UserController {
 
 	@RequestMapping("/detail")
 	public ModelAndView editDetail() throws UnsupportedEncodingException {
-		ModelAndView modelAndView=new ModelAndView();
+		ModelAndView modelAndView = new ModelAndView();
 		User user = (User) request.getSession().getAttribute("user");
 		if (user == null) {
 			modelAndView.addObject("errorMsg", "用户未登录，请先登录");
@@ -143,18 +144,41 @@ public class UserController {
 		return modelAndView;
 	}
 
+	@RequestMapping("passwordEdit")
+	public ModelAndView passwordEdit() {
+		ModelAndView modelAndView = new ModelAndView();
+		User user = (User) request.getSession().getAttribute("user");
+		if (user == null) {
+			modelAndView.addObject("errorMsg", "用户未登录，请先登录");
+			modelAndView.addObject("result", false);
+			modelAndView.setViewName("redirect:/user/login");
+			return modelAndView;
+		}
+		String passwordModifyMsg = request.getParameter("passwordModifyMsg");
+		if (passwordModifyMsg != null && !passwordModifyMsg.equals("")) {
+			request.setAttribute("passwordModifyMsg", passwordModifyMsg);
+		}
+		modelAndView.setViewName("/WEB-INF/user/editPassword.jsp");
+		return modelAndView;
+	}
+
 	@RequestMapping("/modify")
 	public ModelAndView modify(User user) throws IOException {
 		User userOld = (User) request.getSession().getAttribute("user");
-
-		user.setId(userOld.getId());
-		String passwordConfirm = request.getParameter("passwordConfirm");
-		String newpassword = request.getParameter("newpassword");
-		ModelAndView modelAndView=new ModelAndView();
-		if (passwordConfirm!=null&&newpassword!=null&&!passwordConfirm.equals(newpassword)) {
-			modelAndView.addObject("modifyMsg", "新密码与确认密码不一致");
+		if (userOld == null) {
+			throw new RuntimeException("来自未登录用户的请求");
 		}
-		else if (!user.equals(userOld)) {
+		if (!user.getName().equals(userOld.getName())) {
+			throw new RuntimeException("来自名称不一致的用户请求");
+		}
+		ModelAndView modelAndView = new ModelAndView();
+		if (user == null || StringUtils.isEmpty(user.getName()) || StringUtils.isEmpty(user.getPassword())) {
+			modelAndView.addObject("modifyMsg", "用户名或密码为空");
+			modelAndView.setViewName("redirect:/user/detail");
+			return modelAndView;
+		}
+		user.setId(userOld.getId());
+		if (!user.equals(userOld)) {
 			userService.modify(user);
 			modelAndView.addObject("modifyMsg", "修改成功");
 			request.getSession().setAttribute("user", user);
@@ -162,6 +186,40 @@ public class UserController {
 			modelAndView.addObject("modifyMsg", "用户没有信息修改");
 		}
 		modelAndView.setViewName("redirect:/user/detail");
+		return modelAndView;
+	}
+
+	@RequestMapping("passwordModify")
+	public ModelAndView passwordModify(User user) {
+		User userOld = (User) request.getSession().getAttribute("user");
+		if (userOld == null) {
+			throw new RuntimeException("来自未登录用户的请求");
+		}
+		if (!user.getName().equals(userOld.getName())) {
+			throw new RuntimeException("来自名称不一致的用户请求");
+		}
+		ModelAndView modelAndView = new ModelAndView();
+		if (user == null || StringUtils.isEmpty(user.getName()) || StringUtils.isEmpty(user.getPassword())) {
+			modelAndView.addObject("passwordModifyMsg", "用户名或密码为空");
+			modelAndView.setViewName("redirect:/user/passwordEdit");
+			return modelAndView;
+		}
+		String passwordConfirm = request.getParameter("passwordConfirm");
+		String newpassword = request.getParameter("newpassword");
+		if (StringUtils.isEmpty(passwordConfirm)||StringUtils.isEmpty(newpassword)) {
+			modelAndView.addObject("passwordModifyMsg", "新密码或者确认密码为空");
+			modelAndView.setViewName("redirect:/user/passwordEdit");
+			return modelAndView;
+		}
+		if (userOld.getPassword().equals(newpassword)) {
+			modelAndView.addObject("passwordModifyMsg", "新密码与原密码相同");
+			modelAndView.setViewName("redirect:/user/passwordEdit");
+			return modelAndView;
+		}
+		userOld.setPassword(newpassword);
+		userService.modify(userOld);
+		modelAndView.addObject("passwordModifyMsg", "密码修改成功");
+		modelAndView.setViewName("redirect:/user/passwordEdit");
 		return modelAndView;
 	}
 
@@ -199,7 +257,7 @@ public class UserController {
 
 	@RequestMapping("/collectedHouses")
 	public ModelAndView collectedHouses() throws UnsupportedEncodingException {
-		ModelAndView modelAndView=new ModelAndView();
+		ModelAndView modelAndView = new ModelAndView();
 		User user = (User) request.getSession().getAttribute("user");
 		if (user == null) {
 			modelAndView.addObject("errorMsg", "用户未登录，请先登录");
@@ -234,7 +292,7 @@ public class UserController {
 
 	@RequestMapping("/logedHouses")
 	public ModelAndView logedHouses() throws UnsupportedEncodingException {
-		ModelAndView modelAndView=new ModelAndView();
+		ModelAndView modelAndView = new ModelAndView();
 		User user = (User) request.getSession().getAttribute("user");
 		if (user == null) {
 			modelAndView.addObject("errorMsg", "用户未登录，请先登录");
@@ -269,7 +327,7 @@ public class UserController {
 
 	@RequestMapping("/phonedHouses")
 	public ModelAndView phoneedHouses() throws UnsupportedEncodingException {
-		ModelAndView modelAndView=new ModelAndView();
+		ModelAndView modelAndView = new ModelAndView();
 		User user = (User) request.getSession().getAttribute("user");
 		if (user == null) {
 			modelAndView.addObject("errorMsg", "用户未登录，请先登录");

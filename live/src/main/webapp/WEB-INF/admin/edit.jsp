@@ -40,8 +40,12 @@
 	function editSubmit() {
 				var newpassword=$("#newpassword").val();
 				var passwordConfirm=$("#passwordConfirm").val();
-				
+				if(password==''){
+					alert("密码不能为空");
+					return false;
+				}
 				if(newpassword==''||passwordConfirm==''){
+					alert("新密码或者确认密码不能为空");
 					return false;
 				}
 				if($("#newpassword").val()==$("#passwordConfirm").val()){
@@ -68,7 +72,13 @@
 							<!--/set-1-->
 							<div class="set-1">
 								<div class="col-md-6 graph-2">
-									<h3 class="inner-tittle two">管理员密码修改</h3>
+								<c:if test="${not empty modifyMsg }">
+									<center>
+									<font color="red">&lt;${modifyMsg }&gt;</font>
+									</center>
+									</c:if>
+									<h3 class="inner-tittle two">管理员密码修改
+									</h3>
 									<div class="grid-1">
 										<div class="form-body">
 											<form id="editForm" class="form-horizontal" method="post"

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -44,9 +45,11 @@ public class AdminController {
 	}
 
 	@RequestMapping("logout")
-	public String logout(HttpServletRequest request) {
+	public ModelAndView logout(HttpServletRequest request) {
+		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.setViewName("redirect:/admin/login");
 		request.getSession().setAttribute("admin", null);
-		return "/admin/login";
+		return modelAndView;
 	}
 
 	@RequestMapping("getin")
@@ -102,6 +105,10 @@ public class AdminController {
 			return modelAndView;
 		}
 		modelAndView.setViewName("/WEB-INF/admin/edit.jsp");
+		String modifyMsg = request.getParameter("modifyMsg");
+		if (!StringUtils.isEmpty(modifyMsg)) {
+			modelAndView.addObject("modifyMsg", modifyMsg);
+		}
 		return modelAndView;
 	}
 
@@ -118,6 +125,7 @@ public class AdminController {
 		String newpassword = request.getParameter("newpassword");
 		if ((!admin.equals(adminOld)) && passwordConfirm != null && !passwordConfirm.equals("") && newpassword != null
 				&& passwordConfirm.equals(newpassword)) {
+			admin.setPassword(newpassword);
 			adminService.modify(admin);
 			modelAndView.addObject("modifyMsg", "修改成功");
 			request.getSession().setAttribute("admin", admin);

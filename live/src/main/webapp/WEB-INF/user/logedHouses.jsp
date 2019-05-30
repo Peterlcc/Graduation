@@ -81,11 +81,6 @@
 <link rel="stylesheet"
 	href="../../resource/user/css/conditon-select.css" type="text/css">
 
-<!-- 级联选择框 -->
-<script type="text/javascript"
-	src="../../resource/user/js/house-select.js"></script>
-
-
 
 <!-- / flatty theme -->
 <link href='../../resource/edit/assets/stylesheets/light-theme.css'
@@ -148,8 +143,11 @@
 		<nav class='' id='main-nav'>
 			<div class='navigation'>
 				<ul class='nav nav-stacked'>
-					<li class='/user/detail'><a href='#'> <i class='icon-user text-green'></i>
+					<li class=''><a href='/user/detail'> <i class='icon-user text-green'></i>
 							<span>个人信息修改</span>
+					</a></li>
+					<li class=''><a href="/user/passwordEdit">
+							<i class='icon-cog text-green'></i> <span>修改密码</span>
 					</a></li>
 					<li class=''><a href='/user/collectedHouses'> <i
 							class='icon-heart text-green'></i> <span>房屋收藏</span>

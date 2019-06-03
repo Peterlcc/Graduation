@@ -6,7 +6,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Tables</title>
+<title>房屋列表</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
@@ -181,14 +181,15 @@
 			<!--//down-->
 			<div class="menu">
 				<ul id="menu">
-					<li><a href="/admin/analyze#house-chart"><i
-							class="fa fa-table"></i> <span>房屋分析</span></a></li>
-					<li><a href="/admin/analyze#user-chart"><i
-							class="fa fa-table"></i> <span>用户分析</span></a></li>
-					<li><a href="/admin/users"><i class="fa fa-file-text-o"></i>
-							<span>用户明细</span></a></li>
-					<li><a class="disable" href="javascript:void(0)"><i class="fa fa-file-text-o"></i>
-							<span>房屋明细</span></a></li>
+					<li><a href="/admin/analyze"><i class="fa fa-table"></i> <span>分析首页</span></a></li>
+				<li><a href="/admin/simpleAnalyze#house-chart"><i
+						class="fa fa-table"></i> <span>房屋单表分析</span></a></li>
+				<li><a href="/admin/simpleAnalyze#user-chart"><i
+						class="fa fa-table"></i> <span>用户单表分析</span></a></li>
+				<li><a href="/admin/users"><i class="fa fa-file-text-o"></i>
+						<span>用户明细</span></a></li>
+				<li><a href="/admin/houses"><i class="fa fa-file-text-o"></i>
+						<span>房屋明细</span></a></li>
 				</ul>
 			</div>
 

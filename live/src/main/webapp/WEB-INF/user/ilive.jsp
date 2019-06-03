@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Home</title>
+<title>ILive</title>
 <link href="../../resource/user/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" /><!-- Bootstrap stylesheet -->
 <link href="../../resource/user/css/style.css" rel="stylesheet" type="text/css" media="all" /><!-- stylesheet -->
 <link href="../../resource/user/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" /><!-- fontawesome -->  
@@ -57,7 +57,7 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                           <ul class="nav navbar-nav">
-                            <li class="active"><a href="/house/ilive">Home</a></li>
+                            <li class="active"><a href="/house/ilive">主页</a></li>
 							<li class="dropdown">
 							  <a href="#" class="dropdown-toggle" data-toggle="dropdown">服务 <b class="caret"></b></a>
 							  <ul class="dropdown-menu">

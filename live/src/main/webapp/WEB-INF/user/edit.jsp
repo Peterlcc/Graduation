@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>iLive|快速租房好帮手</title>
+<title>iLive|个人信息修改</title>
 <link href="../../resource/user/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css" media="all" />
 <!-- icon图标 -->
@@ -133,7 +133,7 @@
 						<ul class="nav navbar-nav">
 							<li id="userId" style="display: none"
 								value="${sessionScope.user.id}">${sessionScope.user.id}</li>
-							<li><a href="/house/ilive">Home</a></li>
+							<li><a href="/house/ilive">主页</a></li>
 							<li><a href="/house/home">租房</a></li>
 							<li class="dropdown active"><a href="#"
 								class="dropdown-toggle" data-toggle="dropdown">${sessionScope.user.name}

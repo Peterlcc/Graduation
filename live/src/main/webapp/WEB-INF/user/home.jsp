@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>iLive|快速租房好帮手</title>
+	<title>ilive|房屋列表</title>
 	<link href="../../resource/user/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" /><!-- Bootstrap stylesheet -->
 	<link href="../../resource/user/css/style.css" rel="stylesheet" type="text/css" media="all" /><!-- stylesheet -->
 	<link href="../../resource/user/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" /><!-- fontawesome -->  
@@ -82,7 +82,7 @@
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				  <ul class="nav navbar-nav">
 					<li id="userId" style="display: none" value="${user.id}">${user.id}</li>
-					<li ><a href="/house/ilive">Home</a></li>
+					<li ><a href="/house/ilive">主页</a></li>
 					<li class="active"><a href="/house/home">租房</a></li>
 					<li class="dropdown">
 					  <a href="#" class="dropdown-toggle" data-toggle="dropdown">${user.name} <b class="caret"></b></a>

@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Built-By: Administrator
+Built-By: Peter
 Class-Path: lib/httpclient-4.5.7.jar lib/httpcore-4.4.11.jar lib/commo
  ns-codec-1.11.jar lib/htmlunit-2.23.jar lib/xalan-2.7.2.jar lib/seria
  lizer-2.7.2.jar lib/httpmime-4.5.2.jar lib/htmlunit-core-js-2.23.jar 
@@ -27,7 +27,7 @@ Class-Path: lib/httpclient-4.5.7.jar lib/httpcore-4.4.11.jar lib/commo
  ons-1.1.jar lib/animal-sniffer-annotations-1.17.jar lib/fastjson-1.2.
  56.jar lib/jedis-2.9.0.jar lib/jackson-annotations-2.9.0.jar lib/jack
  son-databind-2.9.8.jar lib/jackson-core-2.9.8.jar
-Build-Jdk: 1.8.0_191
+Build-Jdk: 1.8.0_171
 Created-By: Maven Integration for Eclipse
 Main-Class: com.peter.run.GetBaseInfo
 

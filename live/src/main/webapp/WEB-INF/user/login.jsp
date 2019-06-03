@@ -195,7 +195,7 @@
 
 					<li><a href="/user/register"><i
 							class="fa fa-long-arrow-right" aria-hidden="true"></i>注册</a></li>
-					<li><a href="/user/login"><i
+					<li><a class="disable" href="javascript:void(0)"><i
 							class="fa fa-long-arrow-right" aria-hidden="true"></i>登录</a></li>
 
 				</ul>

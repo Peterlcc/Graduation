@@ -129,7 +129,7 @@ a:visited {
 						id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav">
 							<li id="userId" style="display: none" value="${user.id}">${user.id}</li>
-							<li><a href="/house/ilive">Home</a></li>
+							<li><a href="/house/ilive">主页</a></li>
 							<li class="active"><a href="/house/home">租房</a></li>
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown">${user.name} <b class="caret"></b></a>

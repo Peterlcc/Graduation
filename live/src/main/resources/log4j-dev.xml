@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--日志级别以及优先级排序: OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
+<!-- 自定义格式：
+%t：线程名称
+%p：日志级别
+%c：日志消息所在类名
+%m：消息内容
+%M：输出执行方法
+%d：发生时间，%d{yyyy-MM-dd HH:mm:ss,SSS}，输出类似：2011-10-18 22:10:28,921
+%x: 输出和当前线程相关联的NDC(嵌套诊断环境),尤其用到像java servlets这样的多客户多线程的应用中。
+%L：代码中的行数
+%n：换行 -->
+<!--用户目录： ${sys:user.home} -->
+<configuration status="DEBUG" monitorInterval="30">
+	<properties>
+		<!-- 文件输出格式 -->
+		<property name="PATTERN" >%d{yyyy-MM-dd HH:mm:ss} |%p  [%t] %c [%L] -| %m%n</property>
+		<property name="BasePath">f:/tmp</property>
+	</properties>
+
+	<appenders>
+		<Console name="CONSOLE" target="system_out">
+			<PatternLayout pattern="${PATTERN}" />
+		</Console>
+		<!--文件会打印出所有信息，这个log每次运行程序会自动清空，由append属性决定，这个也挺有用的，适合临时测试用 -->
+		<File name="log" fileName="${BasePath}/test.log" append="false">
+			<PatternLayout pattern="${PATTERN}" />
+		</File>
+		<RollingFile name="RollingFileInfo"
+			fileName="${BasePath}/info.log"
+			filePattern="${BasePath}/$${date:yyyy-MM}/info-%d{yyyy-MM-dd}-%i.log">
+			<Filters>
+				<ThresholdFilter level="Info" />
+			</Filters>
+			<PatternLayout
+				pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="100 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="20"></DefaultRolloverStrategy>
+		</RollingFile>
+		<RollingFile name="RollingFileWarn"
+			fileName="${BasePath}/warn.log"
+			filePattern="${BasePath}/$${date:yyyy-MM}/warn-%d{yyyy-MM-dd}-%i.log">
+			<Filters>
+				<ThresholdFilter level="Warn" />
+			</Filters>
+			<PatternLayout
+				pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="100 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="20"></DefaultRolloverStrategy>
+		</RollingFile>
+	</appenders>
+
+	<loggers>
+		<!--过滤掉spring和mybatis的一些无用的DEBUG信息 -->
+		<logger name="org.springframework" level="INFO"></logger>
+		<logger name="org.mybatis" level="INFO"></logger>
+		<root level="DEBUG">
+			<appenderref ref="CONSOLE"></appenderref>
+		</root>
+	</loggers>
+
+</configuration>

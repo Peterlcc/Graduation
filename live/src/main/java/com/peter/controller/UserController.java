@@ -195,6 +195,8 @@ public class UserController {
 		if (userOld == null) {
 			throw new RuntimeException("来自未登录用户的请求");
 		}
+		System.out.println(userOld);
+		System.out.println(user);
 		if (!user.getName().equals(userOld.getName())) {
 			throw new RuntimeException("来自名称不一致的用户请求");
 		}

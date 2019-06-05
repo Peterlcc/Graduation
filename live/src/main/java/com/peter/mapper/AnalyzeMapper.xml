@@ -5,7 +5,7 @@
 		select
 		${houseProperty} as houseProperty,
 		${userProperty} as userProperty,
-		count(1) as num
+		round(${aggregate}(${aggregation}),2) as num
 		from users,majors,house,${middleTable}
 		where users.major_id=majors.id and
 		${middleTable}.house_id=house.id and

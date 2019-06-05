@@ -55,7 +55,7 @@
 				<div class="outter-wp">
 					<!--//sub-heard-part-->
 					<div class="graph-visual tables-main">
-						<h3 class="inner-tittle two">用户信息展示</h3>
+						<h3 class="inner-tittle two">房屋信息展示</h3>
 						<div class="graph">
 							<div class="tables">
 								<table class="table table-hover">

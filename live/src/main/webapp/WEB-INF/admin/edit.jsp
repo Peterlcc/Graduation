@@ -164,14 +164,15 @@
 			<!--//down-->
 			<div class="menu">
 				<ul id="menu">
-					<li><a href="/admin/analyze#house-chart"><i
-							class="fa fa-table"></i> <span>房屋分析</span></a></li>
-					<li><a href="/admin/analyze#user-chart"><i
-							class="fa fa-table"></i> <span>用户分析</span></a></li>
-					<li><a href="/admin/users"><i
-							class="fa fa-file-text-o"></i> <span>用户明细</span></a></li>
-					<li><a href="/admin/houses"><i
-							class="fa fa-file-text-o"></i> <span>房屋明细</span></a></li>
+				<li><a href="/admin/analyze"><i class="fa fa-table"></i> <span>分析首页</span></a></li>
+				<li><a href="/admin/simpleAnalyze#house-chart"><i
+						class="fa fa-table"></i> <span>房屋单表分析</span></a></li>
+				<li><a href="/admin/simpleAnalyze#user-chart"><i
+						class="fa fa-table"></i> <span>用户单表分析</span></a></li>
+				<li><a href="/admin/users"><i class="fa fa-file-text-o"></i>
+						<span>用户明细</span></a></li>
+				<li><a href="/admin/houses"><i class="fa fa-file-text-o"></i>
+						<span>房屋明细</span></a></li>
 				</ul>
 			</div>
 		</div>

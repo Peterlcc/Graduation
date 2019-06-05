@@ -214,8 +214,11 @@
 										<div class='control-group'>
 											<label class='control-label' for='name'>用户名</label>
 											<div class='controls'>
-												<input data-rule-minlength='2'
-													data-rule-required='true' id='name' name='name'
+												<input class="profile-input"
+													data-rule-minlength='2'
+													data-rule-required='true' 
+													id='name' 
+													name='name'
 													placeholder='用户名' type='text'
 													disabled="disabled"
 													value="${sessionScope.user.name }" />

@@ -42,11 +42,13 @@ function allDraw(result, id, userAttr, houseAttr, middleAttr,aggregateAttr,aggre
 	}
 	hours = Array.from(new Set(hours));
 	days = Array.from(new Set(days));
+	var maxNum=0;
 	for (var i = 0; i < result.length; i++) {
 		var item = new Array();
 		item[0] = days.indexOf(result[i].houseProperty);
 		item[1] = hours.indexOf(result[i].userProperty);
 		item[2] = result[i].num;
+		maxNum=Math.max(maxNum,result[i].num);
 		data[i] = item;
 	}
 	var dom = document.getElementById(id);
@@ -59,7 +61,7 @@ function allDraw(result, id, userAttr, houseAttr, middleAttr,aggregateAttr,aggre
 		},
 		tooltip : {},
 		visualMap : {
-			max : 20,
+			max : maxNum,
 			inRange : {
 				color : [ '#313695', '#4575b4', '#74add1', '#abd9e9',
 						'#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43',
@@ -105,8 +107,8 @@ function allDraw(result, id, userAttr, houseAttr, middleAttr,aggregateAttr,aggre
 			name:"数量"
 		},
 		grid3D : {
-			boxWidth : 100,
-			boxDepth : 60,
+			boxWidth : 130,
+			boxDepth : 70,
 			viewControl : {
 			// projection: 'orthographic'
 			},
@@ -122,9 +124,11 @@ function allDraw(result, id, userAttr, houseAttr, middleAttr,aggregateAttr,aggre
 		},
 		series : [ {
 			type : 'bar3D',
+			name:aggregationAttr+'的'+aggregateAttr,
 			data : data.map(function(item) {
 				return {
 					value : [ item[1], item[0], item[2] ],
+					name:[ hours[item[1]], days[item[0]], '值:'+item[2] ]
 				}
 			}),
 			shading : 'lambert',

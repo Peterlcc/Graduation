@@ -15,9 +15,9 @@ public class AnalyzeServiceImpl implements AnalyzeService{
 	@Autowired
 	private AnalyzeMapper analyzeMapper;
 	@Override
-	public List<Map<String, String>> analyzeByProperty(String userProperty, String houseProperty, String middleTable) {
+	public List<Map<String, String>> analyzeByProperty(String userProperty, String houseProperty, String middleTable,String aggregate,String aggregation) {
 		
-		return analyzeMapper.selectByPropertys(userProperty, houseProperty, middleTable);
+		return analyzeMapper.selectByPropertys(userProperty, houseProperty, middleTable,aggregate,aggregation);
 	}
 
 }

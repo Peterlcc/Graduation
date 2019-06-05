@@ -147,7 +147,7 @@
 								class="condition-select" data-selector>
 								<option value="house.price">价格</option>
 								<option value="house.area">房屋面积</option>
-								<option value="user.age">年龄</option>
+								<option value="users.age">年龄</option>
 								<option value="1">字段计数</option>
 							</select>
 							<div id="center-house">
@@ -203,7 +203,7 @@
 		<!--//down-->
 		<div class="menu">
 			<ul id="menu">
-				<li><a href="/admin/analyze"><i class="fa fa-table"></i> <span>分析首页</span></a></li>
+				<li><a href="javascript:void(0)"><i class="fa fa-table"></i> <span>分析首页</span></a></li>
 				<li><a href="/admin/simpleAnalyze#house-chart"><i
 						class="fa fa-table"></i> <span>房屋单表分析</span></a></li>
 				<li><a href="/admin/simpleAnalyze#user-chart"><i

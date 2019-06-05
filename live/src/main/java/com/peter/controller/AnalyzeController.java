@@ -82,13 +82,15 @@ public class AnalyzeController {
 		String userProperty = request.getParameter("userProperty");
 		String houseProperty = request.getParameter("houseProperty");
 		String middleTable = request.getParameter("middleTable");
+		String aggregate = request.getParameter("aggregate");
+		String aggregation = request.getParameter("aggregation");
 		if (userProperty == null || houseProperty == null || middleTable == null) {
 			return null;
 		}
 		if (userProperty.trim().equals("") || houseProperty.trim().equals("") || middleTable.trim().equals("")) {
 			return null;
 		}
-		List<Map<String, String>> map = analyzeService.analyzeByProperty(userProperty, houseProperty, middleTable);
+		List<Map<String, String>> map = analyzeService.analyzeByProperty(userProperty, houseProperty, middleTable,aggregate,aggregation);
 		JSONArray jsonArray = new JSONArray(map);
 
 		return jsonArray.toString();

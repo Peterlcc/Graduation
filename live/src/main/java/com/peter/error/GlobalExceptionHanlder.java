@@ -1,5 +1,7 @@
 package com.peter.error;
 
+import java.util.Arrays;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,8 +17,9 @@ public class GlobalExceptionHanlder {
 	@ExceptionHandler(Exception.class)
 	public ModelAndView excepitonHandle(Exception exception)
 	{
-		//exception.printStackTrace();
-		logger.error("error:{0}",exception.getMessage());
+		exception.printStackTrace();
+		
+		logger.error("error:{}",exception.getMessage()+System.lineSeparator()+Arrays.toString(exception.getStackTrace()));
 		ModelAndView modelAndView=new ModelAndView(errorPage);
 		modelAndView.addObject("errormsg", exception.getMessage());
 		return modelAndView;

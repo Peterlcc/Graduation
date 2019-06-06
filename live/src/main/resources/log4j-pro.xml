@@ -14,7 +14,7 @@
 	<properties>
 		<!-- 文件输出格式 -->
 		<property name="PATTERN">%d{yyyy-MM-dd HH:mm:ss} |%p  [%t] %c [%L] -| %m%n</property>
-		<property name="BasePath">f:/tmp</property>
+		<property name="BasePath">${sys:user.home}/logs</property>
 	</properties>
 
 	<appenders>
